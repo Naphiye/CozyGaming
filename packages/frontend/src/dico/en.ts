@@ -1,5 +1,5 @@
 export default {
-    welcome: "Welcome to Transcendance",
+    welcome: "Welcome to CozyGaming",
     WelcomeLoggedIn: "Welcome back!",
 
     MyProfile: "My Profile",
@@ -244,7 +244,7 @@ export default {
     ErrorInDeleteUser: "Error deleting account",
 
     // FOOTER
-    allRights: "Transcendance. All rights reserved.",
+    allRights: "CozyGaming. All rights reserved.",
     Policy: "Privacy Policy",
     MadeWithHeart: "Made with passion, and a bit of TypeScript.",
     MadeBy: "Created by:",
@@ -252,13 +252,13 @@ export default {
     // RGPD
     RGPD: "GDPR",
     rgpdTitle: "Privacy and Data Protection Policy",
-    rgpdIntro: "At Transcendance, we take your data privacy very seriously. " +
+    rgpdIntro: "At CozyGaming, we take your data privacy very seriously. " +
         "This privacy policy explains how we collect, use, and protect " +
         "your personal information in accordance with the General Data Protection Regulation (GDPR).",
 
     rgpdSection1Title: "1. Collected Personal Data",
     rgpdSection1Text: `
-When you create an account on Transcendance, we only collect the necessary information: username, email, and password.
+When you create an account on CozyGaming, we only collect the necessary information: username, email, and password.
 For accounts created via GitHub, the avatar is imported automatically.
 
 Once the account is created, we may collect and store additional data as you use the app. This includes:
@@ -284,7 +284,7 @@ Other users can also view a link to your detailed match history. No other sensit
 
     rgpdSection3Title: "3. Technical Data",
     rgpdSection3Text: `
-Transcendance does not store persistent technical data online or use it to track users.
+CozyGaming does not store persistent technical data online or use it to track users.
 Matches are linked only to your account, and no global statistics require storing technical data after deletion or anonymization.
 `,
 
@@ -305,7 +305,7 @@ After anonymization, the account is no longer identifiable, your public profile 
     rgpdSection5Title: "5. Account Deletion",
     rgpdSection5Text: `
 You can request complete account deletion at any time. This permanently deletes all the above data and your public profile.
-In Transcendance, deletion and anonymization have the same effect: total erasure of personal data.
+In CozyGaming, deletion and anonymization have the same effect: total erasure of personal data.
 `,
 
     rgpdSection6Title: "6. Managing and Controlling Your Data",
@@ -326,7 +326,7 @@ All these options are accessible from the app.
 We take necessary measures to protect your data against unauthorized access, loss, alteration, or accidental exposure.
 Your data remains linked to your account and is only used for the app's operation.
 
-For added security, Transcendance offers two-factor authentication (2FA). You can enable it from 'My Profile'.`,
+For added security, CozyGaming offers two-factor authentication (2FA). You can enable it from 'My Profile'.`,
 
     rgpdSection8Title: "8. User Rights",
     rgpdSection8Text: `

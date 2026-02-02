@@ -16,8 +16,8 @@ CERTS_DIR = ./packages/config/certs
 USERS_UPLOADS_DIR = ./packages/backend/uploads/users
 LOGS_DIR = ./packages/logs
 
-LAUNCH_TRANSCENDANCE_DEV = docker-compose -f docker-compose.dev.yml
-LAUNCH_TRANSCENDANCE_PROD = docker-compose -f docker-compose.yml
+LAUNCH_COZYGAMING_DEV = docker-compose -f docker-compose.dev.yml
+LAUNCH_COZYGAMING_PROD = docker-compose -f docker-compose.yml
 
 all: dev_or_prod
 
@@ -28,14 +28,14 @@ dev_or_prod:
 ################ PROD ################
 prod: clean_logs create
 	@echo "$(GREENBD)1/1 " "$(YELLOWBD)Lauching docker-compose PROD$(RESET)"; \
-	$(LAUNCH_TRANSCENDANCE_PROD) up --build
+	$(LAUNCH_COZYGAMING_PROD) up --build
 
 ################ END PROD ################
 
 ################ DEV ################
 dev: clean_logs create
 	@echo "$(GREENBD)1/1 " "$(YELLOWBD)Lauching docker-compose DEV$(RESET)"; \
-	$(LAUNCH_TRANSCENDANCE_DEV) up --build
+	$(LAUNCH_COZYGAMING_DEV) up --build
 ################ END DEV ################
 
 ################ CREATE ################
@@ -61,7 +61,7 @@ create_certs:
 		openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 			-keyout $(CERTS_DIR)/selfsigned.key \
 			-out $(CERTS_DIR)/selfsigned.crt \
-			-subj "/C=FR/ST=Ile-de-France/L=Paris/O=LesSuperNanas/CN=transcendance.42.fr"; \
+			-subj "/C=FR/ST=Ile-de-France/L=Paris/O=LesSuperNanas/CN=cozygaming.42.fr"; \
 	fi; \
 
 create_logs:
@@ -99,10 +99,10 @@ clean: clean_db clean_certs clean_logs
 
 ################ FCLEAN ################
 fclean_dev: stop down clean 
-	docker rmi transcendance_frontend:dev transcendance_backend:dev
+	docker rmi cozygaming_frontend:dev cozygaming_backend:dev
 
 fclean_prod: stop down clean 
-	docker rmi transcendance_frontend:prod transcendance_backend:prod
+	docker rmi cozygaming_frontend:prod cozygaming_backend:prod
 
 ################ END FCLEAN ################
 
@@ -115,11 +115,11 @@ re_prod: fclean_prod prod
 ################ COMMANDES COMPOSE ################
 stop:
 	@echo "$(GREENBD)1/1 " "$(YELLOW)Compose stop : Stopping containers$(RESET)"; \
-	$(LAUNCH_TRANSCENDANCE_DEV) stop
+	$(LAUNCH_COZYGAMING_DEV) stop
 
 down:
 	@echo "$(GREENBD)1/1 " "$(YELLOW)Compose down : Stopping and suppressing containers and networks$(RESET)"; \
-	$(LAUNCH_TRANSCENDANCE_DEV) down
+	$(LAUNCH_COZYGAMING_DEV) down
 
 status:
 	@echo "$(GREENBD)1/5 " "$(GREENBD)- List of containers, images, networks and volumes$(RESET)"

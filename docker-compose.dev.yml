@@ -3,8 +3,8 @@ services:
     build:
       context: ./packages/backend
       dockerfile: Dockerfile.dev
-    image: transcendance_backend:dev
-    container_name: transcendance_backend_dev
+    image: cozygaming_backend:dev
+    container_name: cozygaming_backend_dev
     volumes:
       - ./packages/backend/data_db:/backend/data_db
       - ./packages/backend/src:/backend/src
@@ -14,15 +14,15 @@ services:
     ports:
       - "3000:3000"
     networks:
-      - transcendance
+      - cozygaming
     restart: on-failure
 
   frontend:
     build:
       context: ./packages/frontend
       dockerfile: Dockerfile.dev
-    image: transcendance_frontend:dev
-    container_name: transcendance_frontend_dev
+    image: cozygaming_frontend:dev
+    container_name: cozygaming_frontend_dev
     ports:
       - "5173:5173"
     volumes:
@@ -31,11 +31,11 @@ services:
       - ./packages/frontend/public:/frontend/public
       - ./packages/config/certs:/frontend/config/certs
     networks:
-      - transcendance
+      - cozygaming
     depends_on:
       - backend
     restart: on-failure 
 
 networks:
-  transcendance:
+  cozygaming:
     driver: bridge

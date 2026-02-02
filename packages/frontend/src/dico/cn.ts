@@ -1,5 +1,5 @@
 export default {
-    welcome: "欢迎来到Transcendance", // Bienvenue sur Transcendance
+    welcome: "欢迎来到CozyGaming", // Bienvenue sur CozyGaming
     WelcomeLoggedIn: "欢迎回来！", // Bon retour parmi nous !
 
     MyProfile: "我的资料", // Mon profil
@@ -238,7 +238,7 @@ export default {
     ErrorInDeleteUser: "删除账户出错", // Erreur lors de la suppression du compte
 
     // FOOTER
-    allRights: "Transcendance。保留所有权利。", // Transcendance. Tous droits réservés.
+    allRights: "CozyGaming。保留所有权利。", // CozyGaming. Tous droits réservés.
     Policy: "隐私政策", // Politique de confidentialité
     MadeWithHeart: "用心制作，加上一点TypeScript。", // Fabriqué avec passion, et un peu de TypeScript.
     MadeBy: "创建者：", // Créé par :
@@ -246,12 +246,12 @@ export default {
     // RGPD
     RGPD: "GDPR", // RGPD
     rgpdTitle: "隐私和数据保护政策", // Politique de confidentialité et de protection des données
-    rgpdIntro: "在Transcendance，我们非常重视您的数据隐私。本隐私政策说明我们如何根据《通用数据保护条例》(GDPR) 收集、使用和保护您的个人信息。", // Chez Transcendance, nous prenons la confidentialité de vos données très au sérieux. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations personnelles conformément au Règlement Général sur la Protection des Données (RGPD).
+    rgpdIntro: "在CozyGaming，我们非常重视您的数据隐私。本隐私政策说明我们如何根据《通用数据保护条例》(GDPR) 收集、使用和保护您的个人信息。", // Chez CozyGaming, nous prenons la confidentialité de vos données très au sérieux. Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons vos informations personnelles conformément au Règlement Général sur la Protection des Données (RGPD).
 
     // RGPD sections...
     rgpdSection1Title: "1. 收集的个人信息", // 1. Données personnelles collectées
     rgpdSection1Text: `
-在Transcendance创建账户时，我们仅收集创建账户所需信息：用户名、邮箱和密码。
+在CozyGaming创建账户时，我们仅收集创建账户所需信息：用户名、邮箱和密码。
 通过GitHub创建的账户会自动导入头像。
 
 账户创建后，我们可能会根据您使用应用的情况收集和存储其他信息，包括：
@@ -261,7 +261,7 @@ export default {
   <li>详细比赛历史，包括每场比赛结果、对手用户名、组织的比赛、积分及比赛日期</li>
 </ul>
 这些数据是系统功能和个性化用户体验所必需的。
-`, // Lorsque vous créez un compte sur Transcendance, nous collectons uniquement les informations nécessaires à la création : pseudo, email et mot de passe. Pour les comptes créés via GitHub, l'avatar est importé automatiquement. Une fois le compte créé, nous pouvons collecter et stocker d'autres données au fur et à mesure que vous utilisez l'application. Cela inclut : liste d'amis, avatar actuel, historique de matchs détaillé. Ces données sont nécessaires au fonctionnement du système et à la personnalisation de votre expérience utilisateur.
+`, // Lorsque vous créez un compte sur CozyGaming, nous collectons uniquement les informations nécessaires à la création : pseudo, email et mot de passe. Pour les comptes créés via GitHub, l'avatar est importé automatiquement. Une fois le compte créé, nous pouvons collecter et stocker d'autres données au fur et à mesure que vous utilisez l'application. Cela inclut : liste d'amis, avatar actuel, historique de matchs détaillé. Ces données sont nécessaires au fonctionnement du système et à la personnalisation de votre expérience utilisateur.
 
 
     rgpdSection2Title: "2. 可被所有用户查看的公开信息", // 2. Données publiques visibles par tous les utilisateurs
@@ -278,9 +278,9 @@ export default {
 
     rgpdSection3Title: "3. 技术数据", // 3. Données techniques
     rgpdSection3Text: `
-在Transcendance，没有线上持久技术数据，也不用于跟踪用户。
+在CozyGaming，没有线上持久技术数据，也不用于跟踪用户。
 比赛仅与您的账户关联，删除或匿名化后，不保留任何技术统计数据。
-`, // Dans Transcendance, il n’y a pas de données techniques persistantes stockées en ligne ou utilisées pour suivre l’utilisateur. Les matchs sont liés uniquement à votre compte, et aucune statistique globale n’exige la conservation de données techniques après suppression ou anonymisation.
+`, // Dans CozyGaming, il n’y a pas de données techniques persistantes stockées en ligne ou utilisées pour suivre l’utilisateur. Les matchs sont liés uniquement à votre compte, et aucune statistique globale n’exige la conservation de données techniques après suppression ou anonymisation.
 
     rgpdSection4Title: "4. 账户匿名化", // 4. Anonymisation du compte
     rgpdSection4Text: `
@@ -299,8 +299,8 @@ export default {
     rgpdSection5Title: "5. 删除账户", // 5. Suppression du compte
     rgpdSection5Text: `
 您可随时请求彻底删除账户。这会删除上述所有个人数据及公共资料。
-在Transcendance，删除和匿名化效果相同：完全清除个人数据。
-`, // Vous pouvez demander à tout moment la suppression complète de votre compte. Cette action entraîne la suppression définitive de toutes vos données listées ci-dessus et de votre profil public. Dans Transcendance, suppression et anonymisation ont le même effet : un effacement total des données personnelles.
+在CozyGaming，删除和匿名化效果相同：完全清除个人数据。
+`, // Vous pouvez demander à tout moment la suppression complète de votre compte. Cette action entraîne la suppression définitive de toutes vos données listées ci-dessus et de votre profil public. Dans CozyGaming, suppression et anonymisation ont le même effet : un effacement total des données personnelles.
 
     rgpdSection6Title: "6. 数据管理与控制", // 6. Gestion et contrôle de vos données
     rgpdSection6Text: `
@@ -320,8 +320,8 @@ export default {
 我们采取必要措施保护您的数据免遭未经授权的访问、丢失或篡改，以及意外泄露。
 您的数据始终与您的账户相关联，仅用于应用程序的运行。
 
-为增强安全性，Transcendance提供双因素认证（2FA）功能。您可在“我的资料”页面激活此选项。
-`, // Nous prenons les mesures nécessaires pour protéger vos données contre l’accès non autorisé, la perte ou l’altération, et l’exposition accidentelle. Vos données restent liées à votre compte et sont utilisées uniquement pour le fonctionnement de l’application. Pour renforcer la sécurité, Transcendance propose l’authentification à deux facteurs (2FA) pour les comptes créés directement sur notre site. Vous pouvez activer cette option depuis la page 'Mon profil'. Les comptes créés via GitHub bénéficient du 2FA fourni par GitHub. Notre propre 2FA n’est pas proposé pour ces comptes pour l'instant, mais la sécurité fournie par GitHub peut être considérée comme fiable.
+为增强安全性，CozyGaming提供双因素认证（2FA）功能。您可在“我的资料”页面激活此选项。
+`, // Nous prenons les mesures nécessaires pour protéger vos données contre l’accès non autorisé, la perte ou l’altération, et l’exposition accidentelle. Vos données restent liées à votre compte et sont utilisées uniquement pour le fonctionnement de l’application. Pour renforcer la sécurité, CozyGaming propose l’authentification à deux facteurs (2FA) pour les comptes créés directement sur notre site. Vous pouvez activer cette option depuis la page 'Mon profil'. Les comptes créés via GitHub bénéficient du 2FA fourni par GitHub. Notre propre 2FA n’est pas proposé pour ces comptes pour l'instant, mais la sécurité fournie par GitHub peut être considérée comme fiable.
 
     rgpdSection8Title: "8. 用户权利", // 8. Droits de l’utilisateur
     rgpdSection8Text: `

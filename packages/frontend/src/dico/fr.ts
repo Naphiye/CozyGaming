@@ -1,5 +1,5 @@
 export default {
-    welcome: "Bienvenue sur Transcendance",
+    welcome: "Bienvenue sur CozyGaming",
     WelcomeLoggedIn: "Bon retour parmi nous !",
 
     MyProfile: "Mon profil",
@@ -245,7 +245,7 @@ export default {
     ErrorInDeleteUser: "Erreur lors de la suppression du compte",
 
     // FOOTER
-    allRights: "Transcendance. Tous droits réservés.",
+    allRights: "CozyGaming. Tous droits réservés.",
     Policy: "Politique de confidentialité",
     MadeWithHeart: "Fabriqué avec passion, et un peu de TypeScript.",
     MadeBy: "Créé par :",
@@ -253,13 +253,13 @@ export default {
     // RGPD
     RGPD: "RGPD",
     rgpdTitle: "Politique de confidentialité et de protection des données",
-    rgpdIntro: "Chez Transcendance, nous prenons la confidentialité de vos données très au sérieux. " +
+    rgpdIntro: "Chez CozyGaming, nous prenons la confidentialité de vos données très au sérieux. " +
         "Cette politique de confidentialité explique comment nous collectons, utilisons et protégeons " +
         "vos informations personnelles conformément au Règlement Général sur la Protection des Données (RGPD).",
 
     rgpdSection1Title: "1. Données personnelles collectées",
     rgpdSection1Text: `
-Lorsque vous créez un compte sur Transcendance, nous collectons uniquement les informations nécessaires à la création : pseudo, email et mot de passe. 
+Lorsque vous créez un compte sur CozyGaming, nous collectons uniquement les informations nécessaires à la création : pseudo, email et mot de passe. 
 Pour les comptes créés via GitHub, l'avatar est importé automatiquement. 
 
 Une fois le compte créé, nous pouvons collecter et stocker d'autres données au fur et à mesure que vous utilisez l'application. Cela inclut :
@@ -285,7 +285,7 @@ Les autres utilisateurs peuvent également accéder à un lien vers votre histor
 
     rgpdSection3Title: "3. Données techniques",
     rgpdSection3Text: `
-Dans Transcendance, il n’y a pas de données techniques persistantes stockées en ligne ou utilisées pour suivre l’utilisateur. 
+Dans CozyGaming, il n’y a pas de données techniques persistantes stockées en ligne ou utilisées pour suivre l’utilisateur. 
 Les matchs sont liés uniquement à votre compte, et aucune statistique globale n’exige la conservation de données techniques après suppression ou anonymisation.
 `,
 
@@ -306,7 +306,7 @@ Après anonymisation, le compte n’est plus identifiable, votre profil public e
     rgpdSection5Title: "5. Suppression du compte",
     rgpdSection5Text: `
 Vous pouvez demander à tout moment la suppression complète de votre compte. Cette action entraîne la suppression définitive de toutes vos données listées ci-dessus et de votre profil public.
-Dans Transcendance, suppression et anonymisation ont le même effet : un effacement total des données personnelles.
+Dans CozyGaming, suppression et anonymisation ont le même effet : un effacement total des données personnelles.
 `,
 
     rgpdSection6Title: "6. Gestion et contrôle de vos données",
@@ -327,7 +327,7 @@ Toutes ces options sont accessibles depuis l’application.
 Nous prenons les mesures nécessaires pour protéger vos données contre l’accès non autorisé, la perte ou l’altération, et l’exposition accidentelle. 
 Vos données restent liées à votre compte et sont utilisées uniquement pour le fonctionnement de l’application.
 
-Pour renforcer la sécurité, Transcendance propose l’authentification à deux facteurs (2FA). Vous pouvez activer cette option depuis la page 'Mon profil'.`,
+Pour renforcer la sécurité, CozyGaming propose l’authentification à deux facteurs (2FA). Vous pouvez activer cette option depuis la page 'Mon profil'.`,
 
     rgpdSection8Title: "8. Droits de l’utilisateur",
     rgpdSection8Text: `
