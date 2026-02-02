@@ -27,16 +27,16 @@ export async function DashboardPage(container: HTMLDivElement) {
             <div class="flex flex-nowrap justify-around gap-x-[50px]">
     
                 <button id="myProfileBtn" class="dashboardBtn">
-                    <img src="assets/capy/king_right.png" alt="" class="w-34" />
+                    <img src="assets/profile.png" alt="" class="w-34" />
                     ${dico.t("MyProfile")}
                 </button>
     
                 <button id="playPongBtn" class="dashboardBtn">
-                    <img src="assets/capy/pc.png" alt="" class="w-34" />
+                    <img src="assets/game.png" alt="" class="w-34" />
                     ${dico.t("pongMenu")}
                 </button>
                 <button id="friendsBtn" class="dashboardBtn">
-                    <img src="assets/capy/simlish.png" alt="" class="w-34" />
+                    <img src="assets/friends.png" alt="" class="w-34" />
                     ${dico.t("MyFriends")}
                 </button>
             </div>

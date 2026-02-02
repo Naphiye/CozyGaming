@@ -24,5 +24,3 @@ export default defineConfig({
 		},
 	}
 })
-
-// maintenant si on fait https://localhost:5173/api 5173 = le front, on tombe sur hello capy = le back

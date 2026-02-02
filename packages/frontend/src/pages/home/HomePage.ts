@@ -140,17 +140,17 @@ export async function HomePage(container: HTMLDivElement) {
 
                 <!-- FR BUTTON -->
                 <button id="langFr" class="langBtn">
-                    <img src="/assets/lang/capyFR.png" alt="flag_fr" class="w-24" />
+                    <img src="/assets/lang/flagFR.png" alt="flag_fr" class="w-18 mr-5" />
                     <p class="">Français</p>
                 </button>
                 <!-- EN BUTTON -->
                 <button id="langEn" class="langBtn">
-                    <img src="/assets/lang/capyUK.png" alt="flag_uk" class="w-24" />
+                    <img src="/assets/lang/flagUK.png" alt="flag_uk" class="w-18 mr-5" />
                     <p class="">English</p>
                 </button>
                 <!-- CN BUTTON -->
                 <button id="langCn" class="langBtn">
-                    <img src="/assets/lang/capyCN.png" alt="flag_cn" class="w-24" />
+                    <img src="/assets/lang/flagCN.png" alt="flag_cn" class="w-18 mr-5" />
                     <p class="">中文</p>
                 </button>
 
