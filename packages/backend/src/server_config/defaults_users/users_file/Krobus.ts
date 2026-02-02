@@ -15,7 +15,7 @@ export async function ensureKrobusExists() {
             .values({
                 username: "Krobus",
                 passwordHash: hash,
-                email: "transcencapy+krobus@gmail.com",
+                email: "cozygamingproject+krobus@gmail.com",
                 lang: "en",
                 avatar: "defaults_users/Krobus.png",
             })

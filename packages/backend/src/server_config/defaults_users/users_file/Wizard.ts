@@ -15,7 +15,7 @@ export async function ensureWizardExists() {
             .values({
                 username: "Wizard",
                 passwordHash: hash,
-                email: "transcencapy+wizard@gmail.com",
+                email: "cozygamingproject+wizard@gmail.com",
                 lang: "en",
                 avatar: "defaults_users/Wizard.png",
             })

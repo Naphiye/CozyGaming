@@ -15,7 +15,7 @@ export async function ensureMrQiExists() {
             .values({
                 username: "MrQi",
                 passwordHash: hash,
-                email: "transcencapy+mrqi@gmail.com",
+                email: "cozygamingproject+mrqi@gmail.com",
                 lang: "en",
                 avatar: "defaults_users/MrQi.png",
             })

@@ -16,7 +16,7 @@ export async function ensureAbigailExists() {
             .values({
                 username: "Abigail",
                 passwordHash: hash,
-                email: "transcencapy+abigail@gmail.com",
+                email: "cozygamingproject+abigail@gmail.com",
                 lang: "en",
                 avatar: "defaults_users/Abigail.png",
             })
@@ -24,8 +24,8 @@ export async function ensureAbigailExists() {
         if (!newUser[0]) {
             throw new Error("Couldnt create Abigail user");
         }
-        const adminID = await db.select({id: users.id}).from(users).where(eq(users.username, "Pouet"));
-        if(!adminID[0]){
+        const adminID = await db.select({ id: users.id }).from(users).where(eq(users.username, "Pouet"));
+        if (!adminID[0]) {
             console.error("Couldnt find Pouet user to add for Abigail's friends list");
             return;
         }

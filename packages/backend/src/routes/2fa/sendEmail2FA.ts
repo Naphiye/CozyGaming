@@ -36,8 +36,8 @@ export async function sendEmail(
     html: string
 ) {
     await emailSender.sendMail({
-        from: '"CapySupport 🦫" <transcencapy@gmail.com>',
-        to: user.email || "transcencapy@gmail.com",
+        from: '"CozySupport 🪷" <cozygamingproject@gmail.com>',
+        to: user.email || "cozygamingproject@gmail.com",
         subject,
         html,
     });

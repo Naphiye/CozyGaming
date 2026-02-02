@@ -15,7 +15,7 @@ export async function ensurePennyExists() {
             .values({
                 username: "Penny",
                 passwordHash: hash,
-                email: "transcencapy+penny@gmail.com",
+                email: "cozygamingproject+penny@gmail.com",
                 lang: "en",
                 avatar: "defaults_users/Penny.png",
             })

@@ -15,7 +15,7 @@ export async function ensureHaleyExists() {
             .values({
                 username: "Haley",
                 passwordHash: hash,
-                email: "transcencapy+haley@gmail.com",
+                email: "cozygamingproject+haley@gmail.com",
                 lang: "en",
                 avatar: "defaults_users/Haley.png",
             })
@@ -23,8 +23,8 @@ export async function ensureHaleyExists() {
         if (!newUser[0]) {
             throw new Error("Couldnt create Haley user");
         }
-        const adminID = await db.select({id: users.id}).from(users).where(eq(users.username, "Pouet"));
-        if(!adminID[0]){
+        const adminID = await db.select({ id: users.id }).from(users).where(eq(users.username, "Pouet"));
+        if (!adminID[0]) {
             console.error("Couldnt find Pouet user to add for Haley's friends list");
             return;
         }

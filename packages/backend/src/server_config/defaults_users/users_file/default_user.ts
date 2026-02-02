@@ -17,7 +17,7 @@ export async function ensureAdminExists() {
             .values({
                 username: "Pouet",
                 passwordHash: hash,
-                email: "transcencapy+pouet@gmail.com",
+                email: "cozygamingproject+pouet@gmail.com",
                 lang: "fr",
             })
             .returning({ id: users.id });

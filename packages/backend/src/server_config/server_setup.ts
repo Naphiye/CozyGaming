@@ -69,7 +69,7 @@ export async function registerFastify() {
     emailSender = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: "transcencapy@gmail.com",
+            user: "cozygamingproject@gmail.com",
             pass: process.env.GMAIL_APP_PASSWORD, // mot de passe généré par Google
         },
     });

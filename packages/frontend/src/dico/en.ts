@@ -207,7 +207,7 @@ export default {
     titleAddUser: "Add",
     unBlock: "Unblock",
     actionFriendError: "Error performing action on friend",
-    
+
     // FRIENDS - PROFIL PUBLIC
     friendRelationship: "Friend",
     notFriendRelationship: "Not a friend",
@@ -232,7 +232,7 @@ export default {
     BlockSomebodyForm: "Are you sure you want to block this user?",
     RemoveSomebody: "Remove a friend",
     removeFriendForm: "Are you sure you want to remove this friend?",
-	dontRemoveBtn: "Keep this friend",
+    dontRemoveBtn: "Keep this friend",
 
     // FORM CONFIRMATION - DELETE ACCOUNT
     deleteAccountConfirmation: "Are you sure you want to delete your account? This action is irreversible",
@@ -336,7 +336,7 @@ Under GDPR, you have the following rights:
   <li>right to rectification</li>
   <li>right to erasure</li>
 </ul>
-You can exercise these rights via your profile or by contacting the project team at: transcencapy@gmail.com.
+You can exercise these rights via your profile or by contacting the project team at: cozygamingproject@gmail.com.
 `,
 
     rgpdSection9Title: "9. Policy Updates",
