@@ -1,0 +1,35 @@
+services:
+  backend:
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile
+    image: transcendance_backend:prod
+    container_name: transcendance_backend_prod
+    volumes:
+      - ./packages/backend/data_db:/backend/data_db
+      - ./packages/backend/uploads:/backend/uploads
+      - ./packages/config/certs:/backend/config/certs
+      - ./packages/logs:/backend/logs
+    networks:
+      - transcendance
+    restart: on-failure
+
+  frontend:
+    build:
+      context: ./packages/frontend
+      dockerfile: Dockerfile
+    image: transcendance_frontend:prod
+    container_name: transcendance_frontend_prod
+    ports:
+      - "8443:443"
+    volumes:
+      - ./packages/config/certs:/frontend/config/certs
+    networks:
+      - transcendance
+    depends_on:
+      - backend
+    restart: on-failure
+
+networks:
+  transcendance:
+    driver: bridge

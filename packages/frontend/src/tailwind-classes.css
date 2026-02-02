@@ -1,0 +1,463 @@
+@import "tailwindcss";
+
+/* https://tailwindcss.com/docs/functions-and-directives */
+/* https://tailwindcss.com/docs/styling-with-utility-classes */
+
+/* capybara font */
+@font-face {
+  font-family: "capy-font";
+  src: url("/font/capybara-regular.otf") format("truetype");
+  font-display: swap;
+}
+
+/*
+FAD2CB rose background
+B47A67 marron corps du capy
+915D4D marron nez du capy
+9D7C63 " vert" 
+DE766E rouge des coeurs
+F9EEC4 jaune interieur fleur
+F59D8F rose fleurs
+
+E7A06D jaune abeille
+
+FFF6EF blanc back
+
+745136 marron tige
+
+D97D76 rose fleurs
+C16765
+D19D9F
+B97C69
+CE9C9A
+*/
+
+@theme {
+  --font-text: "capy-font", "sans-serif";
+  --color-white: #ffffff;
+  --color-title-lang: #4b291f;
+  --color-pink-bg-title: #f59d8f;
+  --color-pink-bg-lang: #fad2cb;
+  --color-pink-hover-lang: #de766e;
+  --color-brown-light: #b47a67;
+  --color-brown-dark: #915d4d;
+  --color-green: ##728759;
+  --color-red: #d75757;
+}
+
+/* tout marche bien sur une fenetre de 1140 de largeur minimum*/
+@keyframes fade-in-scale {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* mettre au centre de la page comme sur la home page*/
+.containerAllInCenter {
+  @apply grid h-full justify-center items-center;
+}
+.animateFade {
+  @apply animate-[fade-in-scale_1s_ease-out];
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+/* titre du homepage */
+.titlePage {
+  @apply flex place-content-center cursor-default;
+  @apply text-[70px] text-title-lang text-center font-bold text-shadow-[0_8px_12px_rgba(75,41,31,0.6)];
+  @apply rounded-[60px] bg-pink-bg-title shadow-[0_8px_12px_rgba(246,158,144,0.6)];
+}
+.titleWave {
+  @apply inline-block animate-[wave_3s_ease-out_infinite];
+}
+
+/* bouton de langue du home page */
+.langBtn {
+  @apply flex place-content-center items-center p-2.5 pt-0 rounded-[26px];
+  @apply border-3 border-transparent w-1/4;
+  @apply bg-[rgb(245,171,160)] shadow-[0_4px_20px_rgba(245,171,160,0.9)];
+}
+.langBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-110  cursor-pointer;
+  @apply bg-pink-hover-lang border-3 border-[#d36a62];
+}
+
+/* bouton se connecter/se deconnecter*/
+.bigLogBtn {
+  @apply flex place-content-center items-center py-[30px] px-2.5 rounded-[26px] w-1/3;
+  @apply text-[30px] text-white;
+  @apply bg-brown-light shadow-[0_4px_20px_rgba(180,122,103,0.9)] border-3 border-[#a56c59];
+}
+.bigLogBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-120  cursor-pointer;
+  @apply bg-brown-dark border-3 border-[#814f40];
+  @apply font-bold underline decoration-wavy underline-offset-7;
+}
+
+.smallLogBtn {
+  @apply flex place-content-center p-[15px] rounded-[26px];
+  @apply text-[23px] text-white;
+  @apply bg-brown-light shadow-[0_4px_20px_rgba(180,122,103,0.9)] border-3 border-[#a56c59];
+}
+.smallLogBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-110  cursor-pointer;
+  @apply bg-brown-dark border-3 border-[#814f40];
+  @apply font-bold underline decoration-wavy underline-offset-7;
+}
+
+
+.RGPDcontent {
+  @apply p-8 rounded-[30px] bg-[rgba(255,246,239,0.9)] shadow-[0_4px_20px_rgba(246,158,144,0.5)];
+  @apply text-[20px];
+}
+
+.RGPDintro {
+  @apply text-center mb-8 italic text-brown-light;
+}
+
+
+.RGPDcontent h2 {
+  @apply text-2xl font-bold text-brown-dark mb-4 text-[30px]; /* remet les titres plus gros */
+}
+
+
+/* bouton sur le dashboard */
+.dashboardBtn {
+  @apply flex place-content-center items-center p-2.5 pt-0 rounded-[26px]  w-1/3;
+  @apply text-title-lang text-[35px];
+  @apply bg-[rgb(250,210,203)] shadow-[0_4px_20px_rgba(250,210,203,0.9)];
+}
+.dashboardBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-110  cursor-pointer font-bold;
+  @apply bg-[rgb(255,185,173)] shadow-[0_4px_20px_rgba(255,185,173,0.9)];
+}
+/* navbar */
+.navbarBtn {
+  @apply rounded-full;
+  @apply bg-brown-light shadow-[0_4px_20px_rgba(180,122,103,0.9)] border-3 border-[#a56c59];
+}
+.navbarBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-120 cursor-pointer;
+  @apply bg-brown-dark border-3 border-[#814f40];
+}
+
+.navbarImg {
+  @apply w-10 h-10 brightness-200;
+}
+.navbarImg2 {
+  @apply w-9 h-9 brightness-200;
+}
+/* 2FA et supprimer son compte bouton */
+.activateBtn {
+  @apply p-2.5 pl-3 pr-3 rounded-[20px];
+  @apply text-title-lang bg-pink-bg-title  shadow-[0_4px_20px_rgba(246,158,144,0.6)];
+}
+.activateBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-110  cursor-pointer font-bold text-[#263a13];
+  @apply bg-[rgb(153,216,94)] shadow-[0_4px_20px_rgba(153,216,94,0.6)];
+}
+
+.deactivateBtn {
+  @apply p-2.5 pl-3 pr-3 rounded-[20px] text-white;
+  @apply bg-[rgb(190,45,19)]  shadow-[0_4px_20px_rgba(190,45,19,0.6)];
+}
+.deactivateBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-90  cursor-pointer line-through decoration-2 text-[#721e1d];
+  @apply bg-[#d33d3ba8];
+}
+
+/* pour le modal */
+.placeHolder {
+  @apply w-[325px] p-[3px] pl-2 pr-2 border rounded-lg min-w-fit text-[18px] text-center;
+}
+.placeHolder:placeholder-shown {
+  @apply italic;
+}
+.placeHolder:not(:placeholder-shown) {
+  @apply not-italic;
+}
+.descriptionModal{
+    @apply text-gray-500 text-[17px] italic leading-5 mb-2 mx-5;
+}
+.lineForm{
+    @apply border-t mx-10 border-gray-400;
+}
+
+.formRedBtn {
+  @apply p-[5px] pl-3 pr-3 rounded-[20px] text-white bg-[#a83533];
+}
+.formRedBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-90  cursor-pointer line-through decoration-2 text-[#721e1d];
+  @apply bg-[#d33d3ba8];
+}
+
+.formBtn {
+  @apply p-[5px] pl-3 pr-3 rounded-[20px] text-white bg-brown-light text-[25px];
+}
+.formBtn:hover {
+  @apply transition duration-250 ease-in-out cursor-pointer;
+  @apply bg-brown-dark scale-110;
+}
+.formGreenHoverBtn {
+  @apply p-[5px] pl-3 pr-3 rounded-[20px] text-white bg-brown-light text-[25px];
+}
+.formGreenHoverBtn:hover {
+  @apply transition duration-250 ease-in-out cursor-pointer;
+  @apply  bg-[rgb(153,216,94)]  scale-110 text-[#263a13] ;
+}
+
+/* la liste damis - structure globale */
+.titleFriends {
+  @apply text-title-lang font-bold  text-center cursor-default;
+  @apply bg-[rgb(255,246,239)] shadow-[0_4px_20px_rgba(0,0,0,0.1)] rounded-[20px]  pt-1;
+}
+
+.bgUsers {
+  @apply bg-pink-bg-lang shadow-[0_4px_20px_rgba(250,210,203,0.9)] rounded-[26px];
+}
+.bgUsersPaddingFriend {
+  @apply pb-2.5 pl-5 pr-5 pt-[15px];
+}
+
+.bgUniqueUser {
+  @apply flex place-content-center items-center justify-between;
+  @apply bg-[rgb(209,157,159)] shadow-[0_4px_20px_rgba(209,157,159,0.6)] rounded-[10px];
+  @apply m-5 mt-2.5 mb-2.5;
+  @apply p-1 pl-[15px] pr-[15px];
+  @apply text-[25px];
+}
+
+.usersBloc {
+  @apply min-h-[230px] max-h-[230px] overflow-y-auto overflow-x-hidden;
+}
+
+.scrollbar {
+  scrollbar-width: thin; /* rend la scrollbar fine */
+  scrollbar-color: #a56c59 transparent; /* couleur Firefox */
+}
+
+/* liste damis - les pseudo */
+.usernameFriend {
+  @apply text-white text-center max-w-3/5 truncate;
+}
+.usernameFriend:hover {
+  @apply cursor-pointer font-bold underline decoration-2 underline-offset-4;
+}
+
+.usernameBlock {
+  @apply cursor-default text-center min-w-[150px] max-w-[170px] truncate;
+}
+
+.avatarFriendsList {
+  @apply w-12 h-12 rounded-full overflow-hidden object-cover;
+}
+
+/* status online*/
+
+.bgStatus {
+  @apply absolute flex items-center justify-center bottom-0 right-0 overflow-hidden;
+  @apply h-[18px] w-[18px]  bg-[rgb(209,157,159)] rounded-full;
+}
+
+.statusOffline {
+  @apply h-2.5 w-2.5 rounded-full;
+  @apply bg-[#797979];
+}
+
+@keyframes myPing {
+  75%,
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+.statusOnline {
+  @apply absolute  h-[9px] w-[9px] rounded-full;
+  @apply bg-[#43b45f];
+}
+.statusOnlineAnimate {
+  @apply absolute h-2.5 w-2.5 rounded-full;
+  @apply bg-[#43b45f] animate-[myPing_2s_ease-out_infinite];
+}
+
+.logoBtnFriends {
+  @apply w-7 h-7 hover:cursor-pointer;
+}
+
+.logoBtn2Friends {
+  @apply w-5 h-5 hover:cursor-pointer;
+}
+
+/*public profile*/
+.bgAvatar {
+  @apply flex flex-col justify-center items-center;
+  @apply bg-[rgb(209,157,159)] shadow-[0_4px_20px_rgba(209,157,159,0.6)] rounded-4xl;
+}
+
+.AddFriendPublicBtn {
+  @apply p-2.5 pl-3 pr-3 rounded-[20px] text-white;
+  @apply bg-[rgb(207,80,108)] shadow-[0_4px_20px_rgba(207,80,108,0.6)];
+}
+.AddFriendPublicBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-110  cursor-pointer;
+  @apply bg-[rgb(194,68,95)] shadow-[0_4px_20px_rgba(194,68,95,0.6)];
+  @apply font-bold;
+}
+
+.SupprPublicBtn {
+  @apply flex place-content-center p-2.5 rounded-[20px];
+  @apply text-[23px] text-white;
+  @apply bg-[rgb(232,162,23)] shadow-[0_4px_20px_rgba(232,162,23,0.6)];
+}
+.SupprPublicBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-110  cursor-pointer line-through decoration-dashed decoration-1;
+  @apply bg-[rgb(219,152,19)] shadow-[0_4px_20px_rgba(219,152,19,0.6)];
+}
+
+/* message modal */
+.errorMessage {
+  @apply text-red-500 text-center text-[18px] mb-2 mt-3;
+}
+.succesMessage {
+  @apply text-green-500  text-center text-[18px] mb-2 mt-3;
+}
+
+/*pong menu */
+
+.statsBloc {
+  @apply w-[600px] bg-[rgb(209,157,159)] rounded-2xl shadow-lg  p-4 flex flex-col items-center gap-2;
+}
+.statsTitle {
+  @apply text-[30px] font-bold text-title-lang mb-2 text-center cursor-default;
+  @apply bg-[rgb(255,246,239)] shadow-[0_4px_20px_rgba(0,0,0,0.1)] rounded-lg px-2 py-1 w-full whitespace-nowrap;
+}
+
+.statsGrid {
+  @apply flex flex-col gap-2 w-1/2 pr-4;
+}
+
+.statsLine {
+  @apply flex justify-between items-center px-4 py-2 cursor-default;
+  @apply bg-[#FAD2CB] shadow-xs rounded-[10px];
+  @apply text-[25px]  text-title-lang;
+}
+.statsLineCenter {
+  @apply flex justify-center items-center px-4 py-2 cursor-default;
+  @apply bg-[#FAD2CB] shadow-xs rounded-[10px];
+  @apply text-[25px]  text-title-lang;
+}
+
+.statsValue {
+  @apply text-right;
+}
+/* matchHistory */
+.pongBtn {
+  @apply flex items-center text-[35px] p-[15px] py-1.5 rounded-[26px]  text-title-lang;
+  @apply bg-[#FAD2CB] shadow-[0_4px_20px_rgba(250,210,203,0.9)];
+}
+.pongBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-110 font-bold underline decoration-2 underline-offset-4;
+  @apply cursor-pointer;
+  @apply bg-[rgb(255,185,173)] shadow-[0_4px_20px_rgba(255,185,173,0.9)];
+}
+
+.matchHistoryBtn {
+  @apply flex items-center text-[35px] p-[15px] pt-2.5 pb-2.5 rounded-[26px]  text-title-lang;
+  @apply bg-[#CE9C9A] brightness-110 shadow-[0_4px_20px_rgba(209,157,159,0.9)];
+}
+.matchHistoryBtn:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply scale-110 font-bold underline decoration-2 underline-offset-4;
+  @apply cursor-pointer brightness-100;
+}
+
+.matchGrid {
+  @apply bg-[rgb(209,157,159)] rounded-[20px] shadow-[0_8px_20px_rgba(0,0,0,0.15)]  px-4 pt-4 pb-6 flex flex-col;
+}
+
+.matchList {
+  @apply flex flex-col gap-3 overflow-y-auto max-h-[560px];
+}
+
+.matchBloc {
+  @apply px-4 pt-3 pb-4;
+  @apply bg-[#FAD2CB] rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.1)] flex flex-col items-center gap-3;
+}
+.matchBloc:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply brightness-110;
+}
+
+.matchDate {
+  @apply text-[#9D7C63] text-[16px] text-center;
+}
+
+.matchPlayers {
+  @apply relative flex items-center w-full text-[22px] text-[#915D4D];
+}
+
+.matchGuest {
+  @apply text-[21px] text-brown-dark italic truncate flex-1;
+}
+
+.matchUser {
+  @apply font-extrabold text-title-lang  text-[25px] truncate flex-1;
+}
+
+.matchVS {
+  @apply absolute left-1/2 text-brown-light underline underline-offset-4  -translate-x-1/2 px-1;
+}
+
+.matchScore {
+  @apply text-[23px] font-bold text-center;
+}
+
+.seePublicProfile {
+  @apply brightness-80;
+}
+.seePublicProfile:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply cursor-pointer scale-120;
+}
+
+.penModifyClass {
+  @apply brightness-100;
+}
+.penModifyClass:hover {
+  @apply transition duration-250 ease-in-out;
+  @apply cursor-pointer scale-120;
+}
+
+.linkToOtherModal {
+  @apply cursor-default;
+}
+
+.linkToOtherModal:hover {
+  @apply font-bold underline underline-offset-2 decoration-2;
+  @apply transition duration-250 ease-in-out;
+  @apply cursor-pointer scale-110;
+}

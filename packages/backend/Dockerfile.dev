@@ -1,0 +1,22 @@
+FROM node:20-bullseye
+
+RUN apt update -y && apt install -y;\
+apt install -y sqlite3
+
+WORKDIR /backend
+# a partir de mnt on se situe dans le dossier backend
+COPY ./package-lock.json ./package-lock.json
+COPY ./package.json ./package.json
+RUN npm ci
+
+COPY ./nodemon.json ./nodemon.json
+COPY ./tsconfig.json ./tsconfig.json
+COPY ./.env ./.env
+COPY ./init.sh ./init.sh
+
+RUN chmod +x ./init.sh
+
+ENTRYPOINT [ "./init.sh" ]
+
+# pas de --host car fastify ecoute deja sur 3000 et il est dans docker compose declare en tant que port
+CMD [ "npm", "run", "dev" ]

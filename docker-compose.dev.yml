@@ -1,0 +1,41 @@
+services:
+  backend:
+    build:
+      context: ./packages/backend
+      dockerfile: Dockerfile.dev
+    image: transcendance_backend:dev
+    container_name: transcendance_backend_dev
+    volumes:
+      - ./packages/backend/data_db:/backend/data_db
+      - ./packages/backend/src:/backend/src
+      - ./packages/backend/uploads:/backend/uploads
+      - ./packages/config/certs:/backend/config/certs
+      - ./packages/logs:/backend/logs
+    ports:
+      - "3000:3000"
+    networks:
+      - transcendance
+    restart: on-failure
+
+  frontend:
+    build:
+      context: ./packages/frontend
+      dockerfile: Dockerfile.dev
+    image: transcendance_frontend:dev
+    container_name: transcendance_frontend_dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./packages/frontend/src:/frontend/src
+      - ./packages/frontend/index.html:/frontend/index.html
+      - ./packages/frontend/public:/frontend/public
+      - ./packages/config/certs:/frontend/config/certs
+    networks:
+      - transcendance
+    depends_on:
+      - backend
+    restart: on-failure 
+
+networks:
+  transcendance:
+    driver: bridge
