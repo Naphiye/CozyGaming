@@ -1,0 +1,25 @@
+Côté BACK :
+
+état complet du jeu
+
+tick / timing
+
+règles
+
+collisions
+
+score
+
+validation des inputs
+
+Côté FRONT :
+
+canvas
+
+dessin (ball + paddles + score)
+
+capture clavier
+
+envoi d’inputs
+
+réception d’état
