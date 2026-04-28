@@ -10,6 +10,10 @@ export interface BallState {
 export interface PaddleState {
   x: number;
   y: number;
+  width: number;
+  height: number;
+  speed: number;
+  dy: number;
 }
 
 export interface GameState {
@@ -17,4 +21,9 @@ export interface GameState {
   paddle1: PaddleState;
   paddle2: PaddleState;
   scores: { left: number; right: number };
+}
+
+export interface BallUpdateResult {
+  ball: BallState;
+  scored: "left" | "right" | null;  // null = personne n'a marqué
 }
