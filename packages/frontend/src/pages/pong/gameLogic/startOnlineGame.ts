@@ -1,10 +1,28 @@
+import { GameState } from "../types";
 
-
-export function startOnlineGame()
+export function startOnlineGame(canvas: HTMLCanvasElement)
 {
-/*1. Ouvrir une connexion WebSocket vers /ws/pong
-2. Quand le serveur envoie un GameState → dessiner
-3. Écouter le clavier → envoyer { dy } au serveur
-4. Retourner une fonction cleanup qui ferme le WebSocket */
+const ws = new WebSocket(`/api/ws/pong`);
+
+ws.onopen = () => {
+    console.log("pong WS connected");
+};
+
+// 3. Quand on reçoit un message
+ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+    const game: GameState = data;
+    drawScene(canvas, game.paddle1, game.paddle2, game.ball, )
+    
+};
+
+// 4. Envoyer un message
+ws.send(JSON.stringify({ dy: 1 }));
+
+// 5. Fermer la connexion
+ws.close();
+
+
+
 }
 
