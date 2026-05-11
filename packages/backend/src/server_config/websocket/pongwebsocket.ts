@@ -4,15 +4,15 @@ import type { FastifyRequest } from "fastify";
 import { translate } from "../../routes/utils/translationBack.js";
 import { extractUserIdHotJwt } from "./utils/utils.js";
 import { GameState } from "../../game/types.js";
-import { gameTick } from "../../game/index.js";
+import { gameTick, initGameState } from "../../game/index.js";
 
 interface OnlineGame {
 
     id1: number;
-    id2: number;
+    id2: number | null;
     ws1: websocket.WebSocket;
-    ws2: websocket.WebSocket;
-    state: GameState;
+    ws2: websocket.WebSocket | null;
+    state: GameState | null;
 }
 
 
@@ -30,7 +30,7 @@ export function createPongWebsocketRoute() {
                 let actualGame = activeGames.get(matchId);
 
                 if (!actualGame) {
-                    const newGame: OnlineGame = { id1: id, id2: null, ws1: socket, ws2: null, gameState: null };
+                    const newGame: OnlineGame = { id1: id, id2: null, ws1: socket, ws2: null, state: initGameState() };
                     activeGames.set(matchId, newGame);
                     actualGame = newGame;
                     socket.on('message', (data) => {
