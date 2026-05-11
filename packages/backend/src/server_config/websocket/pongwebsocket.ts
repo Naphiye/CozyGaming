@@ -16,8 +16,10 @@ interface OnlineGame {
     intervalId: NodeJS.Timeout | null;
 }
 
+interface WaitingPlayer { id: number; socket: websocket.WebSocket; }
 
 const activeGames = new Map<number, OnlineGame>();
+let waitingPlayer: WaitingPlayer | null = null;
 
 
 export function createPongWebsocketRoute() {
@@ -26,46 +28,49 @@ export function createPongWebsocketRoute() {
         fastify.get('/ws/pong', { websocket: true }, async (socket: websocket.WebSocket, request: FastifyRequest) => {
             const t = translate(request);
             try {
-                const { id, matchId } = extractUserIdHotJwt(t, request);
+                const { id } = extractUserIdHotJwt(t, request);
 
-                let actualGame = activeGames.get(matchId);
-
-                if (!actualGame) {
-                    const newGame: OnlineGame = { id1: id, id2: null, ws1: socket, ws2: null, state: initGameState(), intervalId: null };
-                    activeGames.set(matchId, newGame);
-                    actualGame = newGame;
-                    socket.on('message', (data) => {
-                        const msg = JSON.parse(data.toString());
-                        actualGame.state.paddle1.dy = msg.dy;
-                    });
-
+                if (!waitingPlayer) {
+                    //joueur1
+                    waitingPlayer = { id, socket };
                     socket.on('close', () => {
-                        activeGames.delete(matchId);
+                        waitingPlayer = null;
                     });
+
+                    socket.on('message', (data) => {
+                        const game = activeGames.get(id);  // on cherche au moment du message
+                        if (!game) return;                 // la partie n'existe pas encore, on ignore
+                        const msg = JSON.parse(data.toString());
+                        game.state.paddle1.dy = msg.dy;
+                    });
+
                 }
                 else {
-                    actualGame.id2 = id;
-                    actualGame.ws2 = socket
+                    //joueur2
+                    const newGame: OnlineGame = { id1: waitingPlayer.id, id2: id, ws1: waitingPlayer.socket, ws2: socket, state: initGameState(), intervalId: null };
+                    activeGames.set(newGame.id1, newGame);
+                    waitingPlayer = null;
                     let lastTime = performance.now();
-                    actualGame.intervalId = setInterval(() => {
+                    newGame.intervalId = setInterval(() => {
                         const now = performance.now();
                         const deltaMs = now - lastTime;
                         lastTime = now;
-                        actualGame.state = gameTick(actualGame.state, deltaMs);
-                        socket.send(JSON.stringify(actualGame.state));
-                        actualGame.ws1.send(JSON.stringify(actualGame.state));
+                        newGame.state = gameTick(newGame.state, deltaMs);
+                        socket.send(JSON.stringify(newGame.state));
+                        newGame.ws1.send(JSON.stringify(newGame.state));
                     }, 60);
+
 
 
                     socket.on('message', (data) => {
                         const msg = JSON.parse(data.toString());
-                        actualGame.state.paddle2.dy = msg.dy;
+                        newGame.state.paddle2.dy = msg.dy;
                     });
 
                     socket.on('close', () => {
-                        if (actualGame.intervalId != null)
-                            clearInterval(actualGame.intervalId);
-                        activeGames.delete(matchId);
+                        if (newGame.intervalId != null)
+                            clearInterval(newGame.intervalId);
+                        activeGames.delete(newGame.id1);
                     });
                 }
 
