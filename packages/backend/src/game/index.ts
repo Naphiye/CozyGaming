@@ -1,4 +1,4 @@
-import { GameState, BallState, PaddleState, BallUpdateResult } from "./types.js";
+import type { GameState, BallState, PaddleState } from "./types.js";
 import { updateBall } from "./ball.js";
 import { updatePaddle } from "./paddle.js";
 import { PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_MARGIN, CANVAS_HEIGHT, CANVAS_WIDTH, PADDLE_SPEED, BALL_RADIUS, BALL_SPEED } from "./constants.js";

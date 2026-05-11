@@ -1,6 +1,6 @@
 
 
-import { GameState } from "../types";
+import type { GameState } from "../types";
 import { PADDLE_HEIGHT, PADDLE_WIDTH, CANVAS_WIDTH, CANVAS_HEIGHT, BALL_RADIUS } from "../constants";
 import { drawBackground } from "./drawParts";
 

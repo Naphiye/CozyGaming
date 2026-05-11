@@ -1,9 +1,10 @@
-import { GameState } from "../types";
+import type { GameState } from "../types";
 import { drawOnlineScene } from "../gameInterface/drawOnlineScene";
 
 
 
 function updateMovement(ws: WebSocket, keysPressed: Set<string>) {
+    if (ws.readyState !== WebSocket.OPEN) return;
     // Paddle 1
     if (keysPressed.has("w") || keysPressed.has("ArrowUp")) {
         

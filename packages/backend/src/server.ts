@@ -1,6 +1,7 @@
 import { fastify, isProd, registerFastify } from "./server_config/server_setup.js";
 import { createAllDefaultsUsers } from "./server_config/defaults_users/createAllDefaultsUsers.js";
 import { createWebsocketRoute } from "./server_config/websocket/websocket.js";
+import { createPongWebsocketRoute } from "./server_config/websocket/pongwebsocket.js";
 
 import { createSendcode2faRoute } from "./routes/2fa/sendCode2FA.js"
 import { createCheckcode2faRoute } from "./routes/2fa/checkCode2FA.js"
@@ -30,6 +31,7 @@ import { backend_log } from "./routes/utils/backlog.js";
 
 function createRoutes() {
     createWebsocketRoute();
+    createPongWebsocketRoute();
     createSendcode2faRoute();
     createCheckcode2faRoute();
     createVerifyToken2faRoute();

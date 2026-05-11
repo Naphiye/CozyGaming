@@ -3,7 +3,7 @@ import { fastify } from "../server_setup.js";
 import type { FastifyRequest } from "fastify";
 import { translate } from "../../routes/utils/translationBack.js";
 import { extractUserIdHotJwt } from "./utils/utils.js";
-import { GameState } from "../../game/types.js";
+import type { GameState } from "../../game/types.js";
 import { gameTick, initGameState } from "../../game/index.js";
 
 interface OnlineGame {

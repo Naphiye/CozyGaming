@@ -1,4 +1,4 @@
-import { BallState, PaddleState, BallUpdateResult } from "./types.js";
+import type { BallState, PaddleState, BallUpdateResult } from "./types.js";
 import { BALL_ACCELERATION_FACTOR, BALL_RADIUS, BALL_SPEED, CANVAS_HEIGHT, CANVAS_WIDTH, MAX_BOUNCE_ANGLE, PADDLE_HEIGHT, PADDLE_WIDTH } from "./constants.js";
 
 export function updateBall(
