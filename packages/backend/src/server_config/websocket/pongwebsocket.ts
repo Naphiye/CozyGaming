@@ -12,7 +12,8 @@ interface OnlineGame {
     id2: number | null;
     ws1: websocket.WebSocket;
     ws2: websocket.WebSocket | null;
-    state: GameState | null;
+    state: GameState;
+    intervalId: NodeJS.Timeout | null;
 }
 
 
@@ -30,19 +31,23 @@ export function createPongWebsocketRoute() {
                 let actualGame = activeGames.get(matchId);
 
                 if (!actualGame) {
-                    const newGame: OnlineGame = { id1: id, id2: null, ws1: socket, ws2: null, state: initGameState() };
+                    const newGame: OnlineGame = { id1: id, id2: null, ws1: socket, ws2: null, state: initGameState(), intervalId: null };
                     activeGames.set(matchId, newGame);
                     actualGame = newGame;
                     socket.on('message', (data) => {
                         const msg = JSON.parse(data.toString());
                         actualGame.state.paddle1.dy = msg.dy;
                     });
+
+                    socket.on('close', () => {
+                        activeGames.delete(matchId);
+                    });
                 }
                 else {
                     actualGame.id2 = id;
                     actualGame.ws2 = socket
                     let lastTime = performance.now();
-                    setInterval(() => {
+                    actualGame.intervalId = setInterval(() => {
                         const now = performance.now();
                         const deltaMs = now - lastTime;
                         lastTime = now;
@@ -55,6 +60,12 @@ export function createPongWebsocketRoute() {
                     socket.on('message', (data) => {
                         const msg = JSON.parse(data.toString());
                         actualGame.state.paddle2.dy = msg.dy;
+                    });
+
+                    socket.on('close', () => {
+                        if (actualGame.intervalId != null)
+                            clearInterval(actualGame.intervalId);
+                        activeGames.delete(matchId);
                     });
                 }
 
