@@ -42,7 +42,7 @@ function setupBackHandler(cleanup: () => void) {
 }
 
 
-export function renderPongGame(container: HTMLDivElement, players: string[], username: string) {
+export function renderPongGame(container: HTMLDivElement, players: string[], username: string,  online: boolean = false) {
   const footer = document.querySelector<HTMLDivElement>("footer");
   if (!footer) {
     console.error("Footer not found in DashboardPage");
@@ -57,6 +57,10 @@ export function renderPongGame(container: HTMLDivElement, players: string[], use
   const canvas = setupCanvas(container);
   if (!canvas) return;
 
+      if (online) {
+        // startOnlineGame(canvas, username)  ← on écrira cette fonction après
+        return;
+    }
   const { mode, tournamentMgr } = determineGameMode(players);
   const cleanup = startGame(canvas, players[0], players[1] || "", mode, username, tournamentMgr);
 

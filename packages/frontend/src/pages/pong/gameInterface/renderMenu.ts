@@ -15,7 +15,7 @@ function getElement<T extends HTMLElement>(container: HTMLElement, selector: str
 }
 
 export async function renderPongMenu(container: HTMLDivElement) {
-        const footer = document.querySelector<HTMLDivElement>("footer");
+    const footer = document.querySelector<HTMLDivElement>("footer");
     if (!footer) {
         console.error("Footer not found in DashboardPage");
         return;
@@ -46,9 +46,10 @@ export async function renderPongMenu(container: HTMLDivElement) {
     const playGuestBtn = getElement<HTMLButtonElement>(container, "#playGuestBtn");
     const playAIBtn = getElement<HTMLButtonElement>(container, "#playAIBtn");
     const tournamentBtn = getElement<HTMLButtonElement>(container, "#tournamentBtn");
+    const playOnlineBtn = getElement<HTMLButtonElement>(container, "#playOnlineBtn");
     const matchHistoryBtn = getElement<HTMLButtonElement>(container, "#matchHistoryBtn");
 
-    if (!playGuestBtn || !playAIBtn || !tournamentBtn || !matchHistoryBtn) {
+    if (!playGuestBtn || !playAIBtn || !tournamentBtn || !playOnlineBtn || !matchHistoryBtn) {
         console.error("Boutons du menu introuvables");
         return;
     }
@@ -75,7 +76,9 @@ export async function renderPongMenu(container: HTMLDivElement) {
             renderPongGame(container, playersFilled, username);
         });
     });
-
-
+    
+    playOnlineBtn.addEventListener("click", () => {
+        renderPongGame(container, players, username, true);
+    });
 
 }

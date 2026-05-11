@@ -4,7 +4,7 @@ import { Ball } from "../gameObjects/ball";
 import { Match } from "../gameObjects/match";
 import { TournamentManager } from "./tournament";
 
-export type GameMode = "classic" | "ai" | "tournament";
+export type GameMode = "classic" | "ai" | "tournament" | "online";
 
 export interface GameConfigOptions {
   canvas: HTMLCanvasElement;

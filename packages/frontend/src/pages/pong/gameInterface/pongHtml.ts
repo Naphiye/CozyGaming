@@ -31,6 +31,9 @@ export function getPongMenuHtml(): string {
                 <button class="pongBtn max-w-[310px]" id="tournamentBtn">
                     <img src="/assets/fourplayers.png" alt="matchhistory" class="w-30" />
                     ${dico.t("createTournament")}</button>
+                <button class="pongBtn max-w-[310px]" id="playOnlineBtn">
+                    <img src="/assets/robot-brown.png" alt="matchhistory" class="w-30" />
+                    ${dico.t("playOnline")}</button>
             </div>
 
         </div>
