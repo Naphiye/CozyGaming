@@ -1,5 +1,6 @@
 import type { GameState } from "../types";
 import { drawOnlineScene } from "../gameInterface/drawOnlineScene";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../constants";
 
 
 
@@ -7,16 +8,16 @@ function updateMovement(ws: WebSocket, keysPressed: Set<string>) {
     if (ws.readyState !== WebSocket.OPEN) return;
     // Paddle 1
     if (keysPressed.has("w") || keysPressed.has("ArrowUp")) {
-        
+
         ws.send(JSON.stringify({ dy: -1 }));
-        
+
     }
     else if (keysPressed.has("s") || keysPressed.has("ArrowDown")) {
         ws.send(JSON.stringify({ dy: 1 }));
     }
     else {
         ws.send(JSON.stringify({ dy: 0 }));
-        
+
     }
 }
 
@@ -31,9 +32,9 @@ function onKeyDown(e: KeyboardEvent, ws: WebSocket, keysPressed: Set<string>) {
 function onKeyUp(e: KeyboardEvent, ws: WebSocket, keysPressed: Set<string>) {
     const keysToBlock = ["ArrowUp", "ArrowDown", " ", "w", "s"];
     if (keysToBlock.includes(e.key)) e.preventDefault();
-    
+
     keysPressed.delete(e.key);
-    
+
     updateMovement(ws, keysPressed);
 }
 
@@ -46,24 +47,41 @@ export function startOnlineGame(canvas: HTMLCanvasElement) {
         console.log("pong WS connected");
     };
 
-    // 3. Quand on reçoit un message
-    ws.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        const game: GameState = data;
-        drawOnlineScene(canvas, game);
-
-    };
 
     const keyDownHandler = (e: KeyboardEvent) => onKeyDown(e, ws, keysPressed);
     const keyUpHandler = (e: KeyboardEvent) => onKeyUp(e, ws, keysPressed);
     document.addEventListener("keydown", keyDownHandler);
     document.addEventListener("keyup", keyUpHandler);
 
-    return () => {
+    const cleanup = () => {
         document.removeEventListener("keydown", keyDownHandler);
         document.removeEventListener("keyup", keyUpHandler);
         ws.close();
     };
+
+    // 3. Quand on reçoit un message
+    ws.onmessage = (event) => {
+
+        const data = JSON.parse(event.data);
+        if (data.type === "opponentDisconnected") {
+
+            const ctx = canvas.getContext("2d");
+            if (!ctx)
+                return cleanup();
+            ctx.fillStyle = "#915D4D";
+            ctx.textAlign = "center";
+            ctx.font = "bold 50px capy-font";
+            ctx.fillText("Player disconnected", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+            return cleanup();
+        }
+        else {
+            const game: GameState = data;
+            drawOnlineScene(canvas, game);
+        }
+
+    };
+
+    return cleanup;
 
 }
 

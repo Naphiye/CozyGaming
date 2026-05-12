@@ -68,6 +68,14 @@ export function createPongWebsocketRoute() {
                     });
 
                     socket.on('close', () => {
+                        newGame.ws1.send(JSON.stringify({ type: "opponentDisconnected" }));
+                        if (newGame.intervalId != null)
+                            clearInterval(newGame.intervalId);
+                        activeGames.delete(newGame.id1);
+                    });
+
+                    newGame.ws1.on('close', () => {
+                        socket.send(JSON.stringify({ type: "opponentDisconnected" }));
                         if (newGame.intervalId != null)
                             clearInterval(newGame.intervalId);
                         activeGames.delete(newGame.id1);
