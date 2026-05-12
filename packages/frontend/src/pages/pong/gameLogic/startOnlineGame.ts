@@ -74,6 +74,16 @@ export function startOnlineGame(canvas: HTMLCanvasElement) {
             ctx.fillText("Player disconnected", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
             return cleanup();
         }
+        else if (data.type === "opponentWaiting") {
+
+            const ctx = canvas.getContext("2d");
+            if (!ctx)
+                return cleanup();
+            ctx.fillStyle = "#915D4D";
+            ctx.textAlign = "center";
+            ctx.font = "bold 50px capy-font";
+            ctx.fillText("Waiting for an adversaire", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+        }
         else {
             const game: GameState = data;
             drawOnlineScene(canvas, game);

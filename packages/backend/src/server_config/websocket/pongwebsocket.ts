@@ -33,6 +33,7 @@ export function createPongWebsocketRoute() {
                 if (!waitingPlayer) {
                     //joueur1
                     waitingPlayer = { id, socket };
+                    socket.send(JSON.stringify({ type: "opponentWaiting" }));
                     socket.on('close', () => {
                         waitingPlayer = null;
                     });
