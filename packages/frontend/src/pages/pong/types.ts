@@ -20,6 +20,7 @@ export interface GameState {
   ball: BallState;
   paddle1: PaddleState;
   paddle2: PaddleState;
+  players: {left: string; right: string };
   scores: { left: number; right: number };
 }
 

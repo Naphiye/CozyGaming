@@ -46,6 +46,6 @@ export function initGameState(): GameState {
         speed: BALL_SPEED
     }
 
-    return { ball, paddle1, paddle2, scores: { left: 0, right: 0 } }
+    return { ball, paddle1, paddle2, players: { left: "", right: ""}, scores: { left: 0, right: 0 } }
 
 }

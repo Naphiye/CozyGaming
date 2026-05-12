@@ -5,6 +5,10 @@ import { translate } from "../../routes/utils/translationBack.js";
 import { extractUserIdHotJwt } from "./utils/utils.js";
 import type { GameState } from "../../game/types.js";
 import { gameTick, initGameState } from "../../game/index.js";
+import { db } from "../sqlite/db.js";
+import { users } from "../sqlite/schema.js";
+import { eq } from "drizzle-orm";
+
 
 interface OnlineGame {
 
@@ -51,6 +55,17 @@ export function createPongWebsocketRoute() {
                     const newGame: OnlineGame = { id1: waitingPlayer.id, id2: id, ws1: waitingPlayer.socket, ws2: socket, state: initGameState(), intervalId: null };
                     activeGames.set(newGame.id1, newGame);
                     waitingPlayer = null;
+
+                    const result1 = await db.select({ username: users.username })
+                        .from(users)
+                        .where(eq(users.id, newGame.id1));
+
+                    const result2 = await db.select({ username: users.username })
+                        .from(users)
+                        .where(eq(users.id, id));
+
+                    newGame.state.players.left = result1[0]?.username ?? "Player 1";
+                    newGame.state.players.right = result2[0]?.username ?? "Player 2";
                     let lastTime = performance.now();
                     newGame.intervalId = setInterval(() => {
                         const now = performance.now();

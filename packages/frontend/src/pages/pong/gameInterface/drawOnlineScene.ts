@@ -27,19 +27,25 @@ export function drawOnlineScene(canvas: HTMLCanvasElement, game: GameState) {
     ctx.roundRect(game.paddle2.x, game.paddle2.y, PADDLE_WIDTH, PADDLE_HEIGHT, radius);
     ctx.fill();
 
-    //DESSINER LA BALL 
+    //dessiner la balle
     ctx.beginPath();
     ctx.arc(game.ball.x, game.ball.y, BALL_RADIUS, 0, Math.PI * 2);
     ctx.fillStyle = "#C16765";
     ctx.fill();
     ctx.closePath();
 
-    //dessiner le score
+    //dessiner le scores 
     ctx.font = "bold 28px capy-font";
     ctx.fillStyle = "#C16765";
     ctx.textAlign = "center";
     ctx.fillText(`${game.scores.left} : ${game.scores.right}`, CANVAS_WIDTH / 2, CANVAS_HEIGHT * 0.05);
 
+    //dessiner les pseudos
+    ctx.font = "bold 28px capy-font";
+    ctx.fillStyle = "#C16765";
+    ctx.textAlign = "center";
+    ctx.fillText(game.players.right, (CANVAS_WIDTH * 3) / 4, CANVAS_HEIGHT * 0.05);
+    ctx.fillText(game.players.left, CANVAS_WIDTH / 4, CANVAS_HEIGHT * 0.05);
 
 }
 
