@@ -1,10 +1,10 @@
-import { CANVAS_HEIGHT, PADDLE_HEIGHT }
+import { CANVAS_HEIGHT, PADDLE_HEIGHT, PADDLE_SPEED }
     from "./constants.js";
 import type { PaddleState } from "./types.js";
 
 export function updatePaddle(paddle: PaddleState, deltaTime: number): PaddleState {
 
-    paddle.y += paddle.dy * deltaTime;
+    paddle.y += paddle.dy * PADDLE_SPEED * deltaTime;;
 
     // rester dans le canvas
     if (paddle.y < 0) paddle.y = 0;

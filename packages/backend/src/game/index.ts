@@ -1,12 +1,12 @@
 import type { GameState, BallState, PaddleState } from "./types.js";
 import { updateBall } from "./ball.js";
 import { updatePaddle } from "./paddle.js";
-import { PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_MARGIN, CANVAS_HEIGHT, CANVAS_WIDTH, PADDLE_SPEED, BALL_RADIUS, BALL_SPEED } from "./constants.js";
+import { PADDLE_HEIGHT, PADDLE_WIDTH, PADDLE_MARGIN, CANVAS_HEIGHT, CANVAS_WIDTH, PADDLE_SPEED, BALL_RADIUS, BALL_SPEED, MS_PER_FRAME } from "./constants.js";
 
 
-export function gameTick(state: GameState, deltaTime: number): GameState {
+export function gameTick(state: GameState, deltaMs: number): GameState {
 
-
+    const deltaTime = deltaMs / MS_PER_FRAME;
     const result = updateBall(state.ball, state.paddle1, state.paddle2, deltaTime);
     state.ball = result.ball;
     updatePaddle(state.paddle1, deltaTime);
@@ -42,10 +42,10 @@ export function initGameState(): GameState {
         y: CANVAS_HEIGHT / 2,
         dx: Math.cos(angle) * BALL_SPEED * dir,
         dy: Math.sin(angle) * BALL_SPEED,
-        radius : BALL_RADIUS,
-        speed : BALL_SPEED
+        radius: BALL_RADIUS,
+        speed: BALL_SPEED
     }
 
-    return { ball, paddle1, paddle2, scores : {left : 0, right: 0}}
+    return { ball, paddle1, paddle2, scores: { left: 0, right: 0 } }
 
 }
