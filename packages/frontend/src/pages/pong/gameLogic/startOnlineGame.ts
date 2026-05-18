@@ -3,8 +3,6 @@ import { drawOnlineScene } from "../gameInterface/drawOnlineScene";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../constants";
 import { dico } from "../../../dico/larousse";
 
-
-
 function updateMovement(ws: WebSocket, keysPressed: Set<string>) {
     if (ws.readyState !== WebSocket.OPEN) return;
     // Paddle 1
