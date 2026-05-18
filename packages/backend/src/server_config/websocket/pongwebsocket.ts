@@ -67,15 +67,40 @@ export function createPongWebsocketRoute() {
                     newGame.state.players.left = result1[0]?.username ?? "Player 1";
                     newGame.state.players.right = result2[0]?.username ?? "Player 2";
                     let lastTime = performance.now();
-                    newGame.intervalId = setInterval(() => {
-                        const now = performance.now();
-                        const deltaMs = now - lastTime;
-                        lastTime = now;
-                        newGame.state = gameTick(newGame.state, deltaMs);
-                        socket.send(JSON.stringify(newGame.state));
-                        newGame.ws1.send(JSON.stringify(newGame.state));
-                    }, 60);
+                    setTimeout(() => {
+                        socket.send(JSON.stringify({ type: "countdown", value: 3 }));
+                        newGame.ws1.send(JSON.stringify({ type: "countdown", value: 3 }));
 
+                    }, 0);
+                    setTimeout(() => {
+                        socket.send(JSON.stringify({ type: "countdown", value: 2 }));
+                        newGame.ws1.send(JSON.stringify({ type: "countdown", value: 2 }));
+
+                    }, 1000);
+                    setTimeout(() => {
+                        socket.send(JSON.stringify({ type: "countdown", value: 1 }));
+                        newGame.ws1.send(JSON.stringify({ type: "countdown", value: 1 }));
+
+                    }, 2000);
+                    setTimeout(() => {
+                        socket.send(JSON.stringify({ type: "countdown", value: 0 }));
+                        newGame.ws1.send(JSON.stringify({ type: "countdown", value: 0 }));
+
+                    }, 3000);
+                    setTimeout(() => {
+                        socket.send(JSON.stringify({ type: "countdown", value: 0 }));
+                        newGame.ws1.send(JSON.stringify({ type: "countdown", value: 0 }));
+
+                        newGame.intervalId = setInterval(() => {
+                            const now = performance.now();
+                            const deltaMs = now - lastTime;
+                            lastTime = now;
+                            newGame.state = gameTick(newGame.state, deltaMs);
+                            socket.send(JSON.stringify(newGame.state));
+                            newGame.ws1.send(JSON.stringify(newGame.state));
+                        }, 60);
+
+                    }, 4200);
 
 
                     socket.on('message', (data) => {
