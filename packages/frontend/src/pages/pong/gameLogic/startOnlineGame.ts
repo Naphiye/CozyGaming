@@ -16,9 +16,9 @@ function updateMovement(ws: WebSocket, keysPressed: Set<string>) {
     else if (keysPressed.has("s") || keysPressed.has("ArrowDown")) {
         ws.send(JSON.stringify({ dy: 1 }));
     }
+
     else {
         ws.send(JSON.stringify({ dy: 0 }));
-
     }
 }
 
@@ -26,6 +26,10 @@ function updateMovement(ws: WebSocket, keysPressed: Set<string>) {
 function onKeyDown(e: KeyboardEvent, ws: WebSocket, keysPressed: Set<string>) {
     const keysToBlock = ["ArrowUp", "ArrowDown", " ", "w", "s"];
     if (keysToBlock.includes(e.key)) e.preventDefault();
+    if (e.key === " ") {
+        ws.send(JSON.stringify({ type: "pause" }));
+        return;
+    }
     keysPressed.add(e.key);
     updateMovement(ws, keysPressed);
 }
@@ -33,7 +37,6 @@ function onKeyDown(e: KeyboardEvent, ws: WebSocket, keysPressed: Set<string>) {
 function onKeyUp(e: KeyboardEvent, ws: WebSocket, keysPressed: Set<string>) {
     const keysToBlock = ["ArrowUp", "ArrowDown", " ", "w", "s"];
     if (keysToBlock.includes(e.key)) e.preventDefault();
-
     keysPressed.delete(e.key);
 
     updateMovement(ws, keysPressed);
@@ -103,6 +106,17 @@ export function startOnlineGame(canvas: HTMLCanvasElement) {
             else {
                 ctx.fillText(`${data.value}`, CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 2));
             }
+        }
+        else if (data.type === "pause") {
+            const ctx = canvas.getContext("2d");
+            if (!ctx)
+                return cleanup();
+            ctx.fillStyle = "#915D4D";
+            ctx.font = `300px capy-font`;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle"
+            ctx.fillText(dico.tRaw("Pause"), CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 2));
+
         }
         else {
             const game: GameState = data;

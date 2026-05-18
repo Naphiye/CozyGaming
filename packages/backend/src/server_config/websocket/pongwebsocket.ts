@@ -43,10 +43,26 @@ export function createPongWebsocketRoute() {
                     });
 
                     socket.on('message', (data) => {
+
                         const game = activeGames.get(id);  // on cherche au moment du message
                         if (!game) return;                 // la partie n'existe pas encore, on ignore
                         const msg = JSON.parse(data.toString());
-                        game.state.paddle1.dy = msg.dy;
+                        if (msg.type === "pause") {
+                            if (game.state.status === "playing") {
+                                game.state.status = "paused1";
+                                socket.send(JSON.stringify({ type: "pause" }));
+                                if (game.ws2) {
+                                    game.ws2.send(JSON.stringify({ type: "pause" }));
+                                }
+
+                            }
+                            else if (game.state.status === "paused1") {
+                                game.state.status = "playing";
+                            }
+                        }
+                        else {
+                            game.state.paddle1.dy = msg.dy;
+                        }
                     });
 
                 }
@@ -92,6 +108,7 @@ export function createPongWebsocketRoute() {
                         newGame.ws1.send(JSON.stringify({ type: "countdown", value: 0 }));
 
                         newGame.intervalId = setInterval(() => {
+                            if (newGame.state.status !== "playing") return;
                             const now = performance.now();
                             const deltaMs = now - lastTime;
                             lastTime = now;
@@ -105,7 +122,20 @@ export function createPongWebsocketRoute() {
 
                     socket.on('message', (data) => {
                         const msg = JSON.parse(data.toString());
-                        newGame.state.paddle2.dy = msg.dy;
+
+                        if (msg.type === "pause") {
+                            if (newGame.state.status === "playing") {
+                                newGame.state.status = "paused2";
+                                socket.send(JSON.stringify({ type: "pause" }));
+                                newGame.ws1.send(JSON.stringify({ type: "pause" }));
+                            }
+                            else if (newGame.state.status === "paused2") {
+                                newGame.state.status = "playing";
+                            }
+                        }
+                        else {
+                            newGame.state.paddle2.dy = msg.dy;
+                        }
                     });
 
                     socket.on('close', () => {
@@ -131,6 +161,7 @@ export function createPongWebsocketRoute() {
                     console.error("WS Error : ", error);
                 }
                 socket.close();
+
             }
         });
     })

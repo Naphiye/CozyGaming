@@ -20,8 +20,9 @@ export interface GameState {
   ball: BallState;
   paddle1: PaddleState;
   paddle2: PaddleState;
-  players: {left: string; right: string };
+  players: { left: string; right: string };
   scores: { left: number; right: number };
+  status: "playing" | "paused1" | "paused2";
 }
 
 export interface BallUpdateResult {
