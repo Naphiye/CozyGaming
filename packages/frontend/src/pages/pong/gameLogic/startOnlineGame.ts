@@ -118,6 +118,38 @@ export function startOnlineGame(canvas: HTMLCanvasElement) {
             ctx.fillText(dico.tRaw("Pause"), CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 2));
 
         }
+        else if (data.type === "gameOver") {
+            const ctx = canvas.getContext("2d");
+            if (!ctx)
+                return cleanup();
+            ctx.fillStyle = "#fff6ef";
+            ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            const winnerAlias = data.scores.left > data.scores.right ? data.players.left : data.players.right;
+            const label = dico.tRaw("winner") + " ";
+            // Mesurer la largeur du label
+            ctx.font = "bold 50px capy-font";
+            const labelWidth = ctx.measureText(label).width;
+
+            // Largeur max restante pour le pseudo
+            const maxPseudoWidth = CANVAS_WIDTH * 0.8 - labelWidth;
+
+            // Tronquer correctement le pseudo
+            let displayedPseudo = winnerAlias;
+            let chars = Array.from(winnerAlias);
+            while (ctx.measureText(chars.join("") + "…").width > maxPseudoWidth && chars.length > 1) {
+                chars.pop();
+            }
+            if (chars.length < winnerAlias.length) {
+                displayedPseudo = chars.join("") + "…";
+            }
+
+            // Affichage final
+            ctx.fillStyle = "#915D4D";
+            ctx.textAlign = "center";
+            ctx.font = "bold 50px capy-font";
+            ctx.fillText(label + displayedPseudo, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+            cleanup();
+        }
         else {
             const game: GameState = data;
             drawOnlineScene(canvas, game);

@@ -46,6 +46,16 @@ export function initGameState(): GameState {
         speed: BALL_SPEED
     }
 
-    return { ball, paddle1, paddle2, players: { left: "", right: ""}, scores: { left: 0, right: 0 }, status: "playing" }
+    return { ball, paddle1, paddle2, players: { left: "", right: "" }, scores: { left: 0, right: 0 }, status: "playing" }
 
+}
+
+
+export function isGameOver(state: GameState): boolean {
+    return (
+        ((state.scores.left >= 11 || state.scores.right >= 11) &&
+            Math.abs(state.scores.left - state.scores.right) >= 2) ||
+        state.scores.left >= 13 ||
+        state.scores.right >= 13
+    );
 }

@@ -4,7 +4,7 @@ import type { FastifyRequest } from "fastify";
 import { translate } from "../../routes/utils/translationBack.js";
 import { extractUserIdHotJwt } from "./utils/utils.js";
 import type { GameState } from "../../game/types.js";
-import { gameTick, initGameState } from "../../game/index.js";
+import { gameTick, initGameState, isGameOver } from "../../game/index.js";
 import { db } from "../sqlite/db.js";
 import { users } from "../sqlite/schema.js";
 import { eq } from "drizzle-orm";
@@ -68,53 +68,60 @@ export function createPongWebsocketRoute() {
                 }
                 else {
                     //joueur2
-                    const newGame: OnlineGame = { id1: waitingPlayer.id, id2: id, ws1: waitingPlayer.socket, ws2: socket, state: initGameState(), intervalId: null };
-                    activeGames.set(newGame.id1, newGame);
+                    const game: OnlineGame = { id1: waitingPlayer.id, id2: id, ws1: waitingPlayer.socket, ws2: socket, state: initGameState(), intervalId: null };
+                    activeGames.set(game.id1, game);
                     waitingPlayer = null;
 
                     const result1 = await db.select({ username: users.username })
                         .from(users)
-                        .where(eq(users.id, newGame.id1));
+                        .where(eq(users.id, game.id1));
 
                     const result2 = await db.select({ username: users.username })
                         .from(users)
                         .where(eq(users.id, id));
 
-                    newGame.state.players.left = result1[0]?.username ?? "Player 1";
-                    newGame.state.players.right = result2[0]?.username ?? "Player 2";
+                    game.state.players.left = result1[0]?.username ?? "Player 1";
+                    game.state.players.right = result2[0]?.username ?? "Player 2";
                     let lastTime = performance.now();
                     setTimeout(() => {
                         socket.send(JSON.stringify({ type: "countdown", value: 3 }));
-                        newGame.ws1.send(JSON.stringify({ type: "countdown", value: 3 }));
+                        game.ws1.send(JSON.stringify({ type: "countdown", value: 3 }));
 
                     }, 0);
                     setTimeout(() => {
                         socket.send(JSON.stringify({ type: "countdown", value: 2 }));
-                        newGame.ws1.send(JSON.stringify({ type: "countdown", value: 2 }));
+                        game.ws1.send(JSON.stringify({ type: "countdown", value: 2 }));
 
                     }, 1000);
                     setTimeout(() => {
                         socket.send(JSON.stringify({ type: "countdown", value: 1 }));
-                        newGame.ws1.send(JSON.stringify({ type: "countdown", value: 1 }));
+                        game.ws1.send(JSON.stringify({ type: "countdown", value: 1 }));
 
                     }, 2000);
                     setTimeout(() => {
                         socket.send(JSON.stringify({ type: "countdown", value: 0 }));
-                        newGame.ws1.send(JSON.stringify({ type: "countdown", value: 0 }));
+                        game.ws1.send(JSON.stringify({ type: "countdown", value: 0 }));
 
                     }, 3000);
                     setTimeout(() => {
                         socket.send(JSON.stringify({ type: "countdown", value: 0 }));
-                        newGame.ws1.send(JSON.stringify({ type: "countdown", value: 0 }));
+                        game.ws1.send(JSON.stringify({ type: "countdown", value: 0 }));
 
-                        newGame.intervalId = setInterval(() => {
-                            if (newGame.state.status !== "playing") return;
+                        game.intervalId = setInterval(() => {
+                            if (game.state.status !== "playing") return;
                             const now = performance.now();
                             const deltaMs = now - lastTime;
                             lastTime = now;
-                            newGame.state = gameTick(newGame.state, deltaMs);
-                            socket.send(JSON.stringify(newGame.state));
-                            newGame.ws1.send(JSON.stringify(newGame.state));
+                            game.state = gameTick(game.state, deltaMs);
+                            if (isGameOver(game.state)) {
+                                socket.send(JSON.stringify({ type: "gameOver", scores: game.state.scores ,  players: game.state.players}));
+                                game.ws1.send(JSON.stringify({ type: "gameOver", scores: game.state.scores ,  players: game.state.players}));
+                                if (game.intervalId != null)
+                                    clearInterval(game.intervalId);
+                                activeGames.delete(game.id1);
+                            }
+                            socket.send(JSON.stringify(game.state));
+                            game.ws1.send(JSON.stringify(game.state));
                         }, 60);
 
                     }, 4200);
@@ -124,32 +131,32 @@ export function createPongWebsocketRoute() {
                         const msg = JSON.parse(data.toString());
 
                         if (msg.type === "pause") {
-                            if (newGame.state.status === "playing") {
-                                newGame.state.status = "paused2";
+                            if (game.state.status === "playing") {
+                                game.state.status = "paused2";
                                 socket.send(JSON.stringify({ type: "pause" }));
-                                newGame.ws1.send(JSON.stringify({ type: "pause" }));
+                                game.ws1.send(JSON.stringify({ type: "pause" }));
                             }
-                            else if (newGame.state.status === "paused2") {
-                                newGame.state.status = "playing";
+                            else if (game.state.status === "paused2") {
+                                game.state.status = "playing";
                             }
                         }
                         else {
-                            newGame.state.paddle2.dy = msg.dy;
+                            game.state.paddle2.dy = msg.dy;
                         }
                     });
 
                     socket.on('close', () => {
-                        newGame.ws1.send(JSON.stringify({ type: "opponentDisconnected" }));
-                        if (newGame.intervalId != null)
-                            clearInterval(newGame.intervalId);
-                        activeGames.delete(newGame.id1);
+                        game.ws1.send(JSON.stringify({ type: "opponentDisconnected" }));
+                        if (game.intervalId != null)
+                            clearInterval(game.intervalId);
+                        activeGames.delete(game.id1);
                     });
 
-                    newGame.ws1.on('close', () => {
+                    game.ws1.on('close', () => {
                         socket.send(JSON.stringify({ type: "opponentDisconnected" }));
-                        if (newGame.intervalId != null)
-                            clearInterval(newGame.intervalId);
-                        activeGames.delete(newGame.id1);
+                        if (game.intervalId != null)
+                            clearInterval(game.intervalId);
+                        activeGames.delete(game.id1);
                     });
                 }
 
