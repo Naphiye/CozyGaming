@@ -20,8 +20,7 @@ export function getPongMenuHtml(): string {
                     </button>
                 </div>
             </div>
-
-            <div class="flex justify-between mt-10">
+            <div class="grid grid-cols-2 gap-x-[20px] gap-y-[20px] mt-10 justify-items-center">
                 <button class="pongBtn max-w-[310px]" id="playGuestBtn">
                     <img src="/assets/twoplayers.png" alt="matchhistory" class="w-30" />
                     ${dico.t("playGuest")}</button>
