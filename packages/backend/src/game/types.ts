@@ -22,7 +22,7 @@ export interface GameState {
   paddle2: PaddleState;
   players: { left: string; right: string };
   scores: { left: number; right: number };
-  status: "playing" | "paused1" | "paused2";
+  status: "playing" | "paused1" | "paused2" | "starting";
 }
 
 export interface BallUpdateResult {

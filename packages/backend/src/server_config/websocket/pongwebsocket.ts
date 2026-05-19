@@ -123,6 +123,7 @@ function startGameLoop(game: OnlineGame, socket: websocket.WebSocket) {
         socket.send(JSON.stringify({ type: "countdown", value: 0 }));
         game.ws1.send(JSON.stringify({ type: "countdown", value: 0 }));
 
+        game.state.status = "playing";
         game.intervalId = setInterval(() => {
             if (game.state.status !== "playing") return;
 
