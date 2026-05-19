@@ -95,6 +95,7 @@ export default {
     playOnline: "play online",
     opponentDisconnected: "The opposing player has disconnected.",
     opponentWaiting: "Waiting for an opponent",
+    Online: "Online",
 
 
     // FORM DU TOURNAMENT

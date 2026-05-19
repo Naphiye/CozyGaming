@@ -2,7 +2,7 @@ import { dico } from "../../../dico/larousse";
 
 /** Regroupe les matchs par mode */
 export function groupMatchesByMode(matches: any[]) {
-    const grouped = { classic: [], ai: [], tournament: [] } as Record<string, any[]>;
+    const grouped = { classic: [], ai: [], tournament: [], online: [] } as Record<string, any[]>;
     for (const match of matches) {
         if (grouped[match.mode]) grouped[match.mode].push(match);
     }

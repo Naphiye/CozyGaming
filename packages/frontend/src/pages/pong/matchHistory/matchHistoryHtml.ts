@@ -19,7 +19,7 @@ export function getmatchHistoryHtml(username: string): string {
                 </span>
 
         <!-- ✅ Grille fixe à 3 colonnes -->
-        <div class="grid grid-cols-[repeat(3,310px)] gap-x-5 ">
+        <div class="grid grid-cols-3 gap-5">
           <!-- Classic -->
           <div id="classic-block" class="matchGrid">
             <h2 class="titleFriends px-2 text-[35px] mb-4">${dico.tRaw("Classic")}</h2>
@@ -27,7 +27,7 @@ export function getmatchHistoryHtml(username: string): string {
           </div>
 
           <!-- AI -->
-          <div id="ai-block" class="matchGrid">
+          <div id="ai-block" class="matchGrid" >
             <h2 class="titleFriends px-2 text-[35px] mb-4 ">${dico.tRaw("AI")}</h2>
             <div class="matchList scrollbar cursor-default"></div>
           </div>
@@ -37,6 +37,15 @@ export function getmatchHistoryHtml(username: string): string {
             <h2 class="titleFriends px-2 text-[35px] mb-4">${dico.tRaw("Tournament")}</h2>
             <div class="matchList scrollbar cursor-default"></div>
           </div>
+
+
+          <!-- Online -->
+          <div id="online-block" class="matchGrid">
+            <h2 class="titleFriends px-2 text-[35px] mb-4">${dico.tRaw("Online")}</h2>
+            <div class="matchList scrollbar cursor-default"></div>
+          </div>
+
+
         </div>
             </div>
 

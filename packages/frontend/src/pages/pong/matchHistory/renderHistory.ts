@@ -42,6 +42,7 @@ export async function renderMatchHistory(container: HTMLDivElement, params: { us
       renderMatchesBlock(container, "classic-block", groupedMatches.classic);
       renderMatchesBlock(container, "ai-block", groupedMatches.ai);
       renderTournamentBlock(container, "tournament-block", groupedMatches.tournament);
+      renderMatchesBlock(container, "online-block", groupedMatches.online);
       footer.style.display = "block";
 
    } catch (err: any) {

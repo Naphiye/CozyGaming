@@ -95,6 +95,7 @@ export default {
   playOnline: "在线游戏", //jouer en ligne
   opponentDisconnected: "对手已断线。", // le joueur adversaire s'est deconnecte
   opponentWaiting: "等待对手中", //en attente dun adversaire
+  Online: "在线的", //en ligne
 
   // FORM DU TOURNAMENT
   EnterLoginTournament: "输入比赛访客的用户名", // Entrez les logins des invités du tournoi

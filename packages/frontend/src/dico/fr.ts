@@ -96,6 +96,7 @@ export default {
   playOnline: "Jouer en ligne",
   opponentDisconnected: "L'adversaire s'est déconnecté.",
   opponentWaiting: "En attente d'un adversaire",
+  Online: "En ligne",
 
   // FORM DU TOURNAMENT
   EnterLoginTournament: "Entrez les logins des invités du tournoi",

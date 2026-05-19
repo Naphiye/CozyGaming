@@ -400,7 +400,7 @@ CE9C9A
 }
 
 .matchList {
-  @apply flex flex-col gap-3 overflow-y-auto max-h-[560px];
+  @apply flex flex-col gap-3 overflow-y-auto max-h-[400px];
 }
 
 .matchBloc {
