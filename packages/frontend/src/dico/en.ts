@@ -90,6 +90,13 @@ export default {
     BigWinneris: "The grand winner is",
     guestAlias: "Guest player's username",
 
+
+    //onlinepong
+    playOnline: "play online",
+    opponentDisconnected: "The opposing player has disconnected.",
+    opponentWaiting: "Waiting for an opponent",
+
+
     // FORM DU TOURNAMENT
     EnterLoginTournament: "Enter the usernames of the tournament guests",
     EnterLoginP1: "Enter a username for the first guest:",

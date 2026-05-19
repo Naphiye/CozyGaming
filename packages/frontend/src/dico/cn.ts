@@ -90,6 +90,12 @@ export default {
   BigWinneris: "最终胜者是", // Le grand gagnant est
   guestAlias: "访客用户名", // Alias du joueur invité
 
+
+  //onlinepong
+  playOnline: "在线游戏", //jouer en ligne
+  opponentDisconnected: "对手已断线。", // le joueur adversaire s'est deconnecte
+  opponentWaiting: "等待对手中", //en attente dun adversaire
+
   // FORM DU TOURNAMENT
   EnterLoginTournament: "输入比赛访客的用户名", // Entrez les logins des invités du tournoi
   EnterLoginP1: "输入第一个访客用户名：", // Entrer un login pour le premier invité :

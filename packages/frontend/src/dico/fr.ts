@@ -91,6 +91,12 @@ export default {
   BigWinneris: "Le grand gagnant est",
   guestAlias: "Alias du joueur invité",
 
+
+  //online pong
+  playOnline: "Jouer en ligne",
+  opponentDisconnected: "L'adversaire s'est déconnecté.",
+  opponentWaiting: "En attente d'un adversaire",
+
   // FORM DU TOURNAMENT
   EnterLoginTournament: "Entrez les logins des invités du tournoi",
   EnterLoginP1: "Entrer un login pour le premier invité :",

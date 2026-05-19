@@ -3,6 +3,14 @@ import { drawOnlineScene } from "../gameInterface/drawOnlineScene";
 import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../constants";
 import { dico } from "../../../dico/larousse";
 
+
+interface GameOverData {
+    type: "gameOver";
+    scores: { left: number; right: number };
+    players: { left: string; right: string };
+}
+
+
 function updateMovement(ws: WebSocket, keysPressed: Set<string>) {
     if (ws.readyState !== WebSocket.OPEN) return;
     // Paddle 1
@@ -41,6 +49,97 @@ function onKeyUp(e: KeyboardEvent, ws: WebSocket, keysPressed: Set<string>) {
 }
 
 
+function drawWinner(canvas: HTMLCanvasElement, cleanup: ()=> void, data: GameOverData) {
+
+    //recuperation du canva
+    const ctx = canvas.getContext("2d");
+    if (!ctx)
+        return cleanup();
+
+    ctx.fillStyle = "#fff6ef";
+    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    const winnerAlias = data.scores.left > data.scores.right ? data.players.left : data.players.right;
+    const label = dico.tRaw("winner") + " ";
+    // Mesurer la largeur du label
+    ctx.font = "bold 50px capy-font";
+    const labelWidth = ctx.measureText(label).width;
+
+    // Largeur max restante pour le pseudo
+    const maxPseudoWidth = CANVAS_WIDTH * 0.8 - labelWidth;
+
+    // Tronquer correctement le pseudo
+    let displayedPseudo = winnerAlias;
+    let chars = Array.from(winnerAlias);
+    while (ctx.measureText(chars.join("") + "…").width > maxPseudoWidth && chars.length > 1) {
+        chars.pop();
+    }
+    if (chars.length < winnerAlias.length) {
+        displayedPseudo = chars.join("") + "…";
+    }
+
+    // Affichage final
+    ctx.fillStyle = "#915D4D";
+    ctx.textAlign = "center";
+    ctx.font = "bold 50px capy-font";
+    ctx.fillText(label + displayedPseudo, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+}
+
+function drawOnlineGame(canvas: HTMLCanvasElement,  event: MessageEvent<any>, cleanup: () => void) {
+    const data = JSON.parse(event.data);
+
+    //recuperation du canva
+    const ctx = canvas.getContext("2d");
+    if (!ctx)
+        return cleanup();
+
+    if (data.type === "opponentDisconnected") {
+        ctx.fillStyle = "#fff6ef";
+        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        ctx.fillStyle = "#915D4D";
+        ctx.textAlign = "center";
+        ctx.font = "bold 50px capy-font";
+        ctx.fillText(dico.tRaw("opponentDisconnected"), CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+        return cleanup();
+    }
+    else if (data.type === "opponentWaiting") {
+        ctx.fillStyle = "#915D4D";
+        ctx.textAlign = "center";
+        ctx.font = "bold 50px capy-font";
+        ctx.fillText(dico.tRaw("opponentWaiting"), CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    }
+    else if (data.type === "countdown") {
+        ctx.fillStyle = "#fff6ef";
+        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        ctx.fillStyle = "#915D4D";
+        ctx.font = `300px capy-font`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle"
+        if (data.value === 0) {
+            ctx.fillText(dico.tRaw("Go"), CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 2));
+        }
+        else {
+            ctx.fillText(`${data.value}`, CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 2));
+        }
+    }
+    else if (data.type === "pause") {
+        ctx.fillStyle = "#915D4D";
+        ctx.font = `300px capy-font`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle"
+        ctx.fillText(dico.tRaw("Pause"), CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 2));
+
+    }
+    else if (data.type === "gameOver") {
+        drawWinner(canvas, cleanup, data);
+        return cleanup();
+    }
+    else {
+        const game: GameState = data;
+        drawOnlineScene(canvas, game);
+    }
+
+}
+
 export function startOnlineGame(canvas: HTMLCanvasElement) {
     const ws = new WebSocket(`/api/ws/pong`);
     const keysPressed = new Set<string>();
@@ -64,98 +163,9 @@ export function startOnlineGame(canvas: HTMLCanvasElement) {
     // 3. Quand on reçoit un message
     ws.onmessage = (event) => {
 
-        const data = JSON.parse(event.data);
-        if (data.type === "opponentDisconnected") {
-
-            const ctx = canvas.getContext("2d");
-            if (!ctx)
-                return cleanup();
-            ctx.fillStyle = "#fff6ef";
-            ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-            ctx.fillStyle = "#915D4D";
-            ctx.textAlign = "center";
-            ctx.font = "bold 50px capy-font";
-            ctx.fillText("Player disconnected", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
-            return cleanup();
-        }
-        else if (data.type === "opponentWaiting") {
-
-            const ctx = canvas.getContext("2d");
-            if (!ctx)
-                return cleanup();
-            ctx.fillStyle = "#915D4D";
-            ctx.textAlign = "center";
-            ctx.font = "bold 50px capy-font";
-            ctx.fillText("Waiting for an adversaire", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
-        }
-        else if (data.type === "countdown") {
-            const ctx = canvas.getContext("2d");
-            if (!ctx)
-                return cleanup();
-            ctx.fillStyle = "#fff6ef";
-            ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-            ctx.fillStyle = "#915D4D";
-            ctx.font = `300px capy-font`;
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle"
-            if (data.value === 0) {
-                ctx.fillText(dico.tRaw("Go"), CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 2));
-            }
-            else {
-                ctx.fillText(`${data.value}`, CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 2));
-            }
-        }
-        else if (data.type === "pause") {
-            const ctx = canvas.getContext("2d");
-            if (!ctx)
-                return cleanup();
-            ctx.fillStyle = "#915D4D";
-            ctx.font = `300px capy-font`;
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle"
-            ctx.fillText(dico.tRaw("Pause"), CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 2));
-
-        }
-        else if (data.type === "gameOver") {
-            const ctx = canvas.getContext("2d");
-            if (!ctx)
-                return cleanup();
-            ctx.fillStyle = "#fff6ef";
-            ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-            const winnerAlias = data.scores.left > data.scores.right ? data.players.left : data.players.right;
-            const label = dico.tRaw("winner") + " ";
-            // Mesurer la largeur du label
-            ctx.font = "bold 50px capy-font";
-            const labelWidth = ctx.measureText(label).width;
-
-            // Largeur max restante pour le pseudo
-            const maxPseudoWidth = CANVAS_WIDTH * 0.8 - labelWidth;
-
-            // Tronquer correctement le pseudo
-            let displayedPseudo = winnerAlias;
-            let chars = Array.from(winnerAlias);
-            while (ctx.measureText(chars.join("") + "…").width > maxPseudoWidth && chars.length > 1) {
-                chars.pop();
-            }
-            if (chars.length < winnerAlias.length) {
-                displayedPseudo = chars.join("") + "…";
-            }
-
-            // Affichage final
-            ctx.fillStyle = "#915D4D";
-            ctx.textAlign = "center";
-            ctx.font = "bold 50px capy-font";
-            ctx.fillText(label + displayedPseudo, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
-            cleanup();
-        }
-        else {
-            const game: GameState = data;
-            drawOnlineScene(canvas, game);
-        }
+        drawOnlineGame(canvas, event, cleanup);
 
     };
-
     return cleanup;
-
 }
 
