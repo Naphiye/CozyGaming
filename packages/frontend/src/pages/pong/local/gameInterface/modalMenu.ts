@@ -1,7 +1,7 @@
-import { dico } from "../../../dico/larousse";
-import { setPlaceHolderRequiredMsg } from "../../DOM_helper.ts";
-import { EmptyModal } from "../../modal/EmptyModal";
-import { makeUsernameSchema } from "../../utils/utilsSchema.ts";
+import { dico } from "../../../../dico/larousse.ts";
+import { setPlaceHolderRequiredMsg } from "../../../DOM_helper.ts";
+import { EmptyModal } from "../../../modal/EmptyModal.ts";
+import { makeUsernameSchema } from "../../../utils/utilsSchema.ts";
 import { aliasValidation, tournoiValidation } from "../gameLogic/aliasValidation.ts";
 
 

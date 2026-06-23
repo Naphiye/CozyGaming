@@ -1,7 +1,7 @@
 import { auth } from "../../../authentication/auth";
 import { dico } from "../../../dico/larousse";
 import { navigate } from "../../../router";
-import { Match } from "../gameObjects/match";
+import { Match } from "../local/gameObjects/match";
 
 interface PongStats {
     matchesPlayed: number;

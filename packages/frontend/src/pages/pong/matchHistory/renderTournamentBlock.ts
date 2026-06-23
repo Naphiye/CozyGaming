@@ -1,7 +1,7 @@
 import { emptyMessage } from "./utils";
 import { formatDate } from "./utils";
 import { dico } from "../../../dico/larousse";
-import { Match } from "../gameObjects/match";
+import { Match } from "../local/gameObjects/match";
 
 // on tulise userplace et pas username pour savoir si le user etait a gauche ou a droite car le username peut changer.
 function choosePlayerClass(userplace: string, side: "left" | "right"): string {

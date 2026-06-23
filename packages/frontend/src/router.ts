@@ -2,7 +2,7 @@ import "./tailwind-classes.css"
 import { HomePage } from "./pages/home/HomePage.ts"
 import { DashboardPage } from "./pages/dashboard/DashboardPage.ts"
 import { ErrorPage } from './pages/utils/404.ts';
-import { renderPongMenu } from "./pages/pong/gameInterface/renderMenu.ts";
+import { renderPongMenu } from "./pages/pong/local/gameInterface/renderMenu.ts";
 import { auth } from "./authentication/auth.ts";
 import { ProfilePage as MyProfilePage } from "./pages/profile/ProfilePage.ts"
 import { renderMatchHistory } from "./pages/pong/matchHistory/renderHistory.ts";
@@ -80,7 +80,7 @@ export async function updateRoute() {
 
     if (!route) {
         if (auth.user) {
-            
+
             const isProfilePage = path.match(/^\/profile\/(.+)$/);
             if (isProfilePage) {
                 // on defini la route en premier donc ca sera profile pour publicprofilepage

@@ -1,4 +1,4 @@
-import { CANVAS_HEIGHT, PADDLE_HEIGHT, PADDLE_SPEED } from "../constants";
+import { CANVAS_HEIGHT, PADDLE_HEIGHT, PADDLE_SPEED } from "../../constants";
 import { Ball } from "../gameObjects/ball";
 import { Paddle } from "../gameObjects/paddle";
 

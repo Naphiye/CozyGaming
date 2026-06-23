@@ -1,5 +1,5 @@
-import { dico } from "../../../dico/larousse";
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../constants";
+import { dico } from "../../../../dico/larousse";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../../constants";
 import type { GameMode } from "../gameLogic/gameConfig";
 
 export class Match {

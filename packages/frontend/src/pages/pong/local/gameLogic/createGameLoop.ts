@@ -5,8 +5,8 @@ import { drawScene } from "../gameInterface/drawScene.ts";
 import { handleEndGame } from "./endGame.ts";
 import { mouseInputHandler } from "./mouseInputHandler.ts";
 import { restartButtonHandler } from "./endGame.ts";
-import { predictBallY, movePaddleAI } from "./aiMode";
-import { CANVAS_WIDTH, CANVAS_HEIGHT, MS_PER_FRAME, AI_UPDATE_INTERVAL } from "../constants.ts";
+import { predictBallY, movePaddleAI } from "./aiMode.ts";
+import { CANVAS_WIDTH, CANVAS_HEIGHT, MS_PER_FRAME, AI_UPDATE_INTERVAL } from "../../constants.ts";
 
 
 export function createGameLoop(config: GameConfig) {

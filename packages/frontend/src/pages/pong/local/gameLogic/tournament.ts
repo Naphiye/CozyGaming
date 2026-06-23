@@ -1,7 +1,7 @@
 import { Match } from "../gameObjects/match.ts";
-import type { GameMode } from "./gameConfig";
-import { fetchRegisterMatchHistory } from "../matchHistory/fetchHistory.ts";
-import { fetchTournamentMatchByDate } from "../matchHistory/fetchHistory.ts";
+import type { GameMode } from "./gameConfig.ts";
+import { fetchRegisterMatchHistory } from "../../matchHistory/fetchHistory.ts";
+import { fetchTournamentMatchByDate } from "../../matchHistory/fetchHistory.ts";
 
 export async function registerTournamentMatchs(
   matchs: Match[],

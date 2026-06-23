@@ -1,4 +1,4 @@
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../constants";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../../constants";
 
 export class mouseInputHandler {
     isHovering = false;
@@ -12,10 +12,10 @@ export class mouseInputHandler {
         this.onClickRestart = onClickRestart;
     }
 
-	public bind() {
-		this.canvas.addEventListener("click", this.handleClick);
+    public bind() {
+        this.canvas.addEventListener("click", this.handleClick);
         this.canvas.addEventListener("mousemove", this.handleHover);
-	}
+    }
 
     private handleClick = (e: MouseEvent) => {
         const rect = this.canvas.getBoundingClientRect();

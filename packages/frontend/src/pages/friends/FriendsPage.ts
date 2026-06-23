@@ -5,7 +5,7 @@ import { loadPage } from "../DOM_helper";
 import { updateAllSections } from "./utils/sections";
 import { ws_friendsPage } from "./utils/ws_friendsPage";
 import { auth } from "../../authentication/auth";
-import { safeFetch } from "../pong/gameInterface/fetchGame";
+import { safeFetch } from "../pong/local/gameInterface/fetchGame";
 
 // fetch all users sauf mwa
 async function fetchAllUsers() {
@@ -22,7 +22,7 @@ async function fetchAllUsers() {
             auth.setUser(false, false);
             // navigate("/");
         }
-        if(res.status === 429){
+        if (res.status === 429) {
             console.log("Too many requests");
         }
         throw new Error(data.error || dico.tRaw("unknownError"));

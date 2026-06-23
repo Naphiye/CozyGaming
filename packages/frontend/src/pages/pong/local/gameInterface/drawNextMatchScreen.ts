@@ -1,7 +1,7 @@
-import { dico } from "../../../dico/larousse";
+import { dico } from "../../../../dico/larousse";
 import type { GameMode } from "../gameLogic/gameConfig";
 import { GameStateManager } from "../gameLogic/gameStateManager";
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../constants";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../../constants";
 
 
 

@@ -7,7 +7,7 @@ import {
   PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_MARGIN,
   CANVAS_HEIGHT,
   CANVAS_WIDTH
-} from "../constants";
+} from "../../constants";
 
 export function initGameObjects(
   mode: GameMode,

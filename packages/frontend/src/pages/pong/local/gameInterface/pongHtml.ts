@@ -1,4 +1,4 @@
-import { dico } from "../../../dico/larousse.ts";
+import { dico } from "../../../../dico/larousse.ts";
 
 export function getPongMenuHtml(): string {
     return `

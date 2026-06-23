@@ -1,7 +1,7 @@
 import { emptyMessage } from "./utils";
 import { formatDate } from "./utils.ts";
 import { dico } from "../../../dico/larousse.ts";
-import { Match } from "../gameObjects/match.ts";
+import { Match } from "../local/gameObjects/match.ts";
 import { navigate } from "../../../router.ts";
 
 /** Rendu d’un match classique ou AI */

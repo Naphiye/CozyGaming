@@ -1,9 +1,9 @@
-import { GameConfig } from "./gameConfig";
-import type { GameMode } from "./gameConfig";
-import { GameStateManager } from "./gameStateManager";
+import { GameConfig } from "./gameConfig.ts";
+import type { GameMode } from "./gameConfig.ts";
+import { GameStateManager } from "./gameStateManager.ts";
 import { Match } from "../gameObjects/match.ts";
 import { registerTournamentMatchs } from "./tournament.ts";
-import { fetchRegisterMatchHistory } from "../matchHistory/fetchHistory.ts";
+import { fetchRegisterMatchHistory } from "../../matchHistory/fetchHistory.ts";
 
 
 

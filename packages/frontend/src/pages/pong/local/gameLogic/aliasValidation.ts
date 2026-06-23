@@ -1,7 +1,7 @@
-import { auth } from "../../../authentication/auth.ts";
-import { dico } from "../../../dico/larousse.ts";
-import { navigate } from "../../../router.ts";
-import { makeUsernameSchema } from "../../utils/utilsSchema.ts";
+import { auth } from "../../../../authentication/auth.ts";
+import { dico } from "../../../../dico/larousse.ts";
+import { navigate } from "../../../../router.ts";
+import { makeUsernameSchema } from "../../../utils/utilsSchema.ts";
 
 async function fetchUniqueUser(alias: string) {
     const lang = dico.getLanguage();
@@ -52,8 +52,8 @@ export async function tournoiValidation(players: string[]): Promise<{
         const schema = makeUsernameSchema();
         const parseResult = schema.safeParse(alias);
         if (!parseResult.success) {
-           errors[i] = parseResult.error.issues[0].message;
-              continue;
+            errors[i] = parseResult.error.issues[0].message;
+            continue;
         }
         const errorMsg = await aliasValidation(alias);
         if (errorMsg) {

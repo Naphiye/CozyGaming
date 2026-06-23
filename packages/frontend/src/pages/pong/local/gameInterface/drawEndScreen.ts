@@ -1,7 +1,7 @@
 import { Match } from "../gameObjects/match";
-import { dico } from "../../../dico/larousse";
+import { dico } from "../../../../dico/larousse";
 import type { GameMode } from "../gameLogic/gameConfig";
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../constants";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../../constants";
 
 
 // 💄 Paramètres UI basés sur des proportions

@@ -1,4 +1,4 @@
-import { CANVAS_HEIGHT, PADDLE_HEIGHT, PADDLE_SPEED, PADDLE_WIDTH } from "../constants";
+import { CANVAS_HEIGHT, PADDLE_HEIGHT, PADDLE_SPEED, PADDLE_WIDTH } from "../../constants";
 
 export class Paddle {
   x: number;

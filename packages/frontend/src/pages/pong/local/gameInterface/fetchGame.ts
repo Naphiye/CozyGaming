@@ -1,4 +1,4 @@
-import { navigate } from "../../../router.ts";
+import { navigate } from "../../../../router.ts";
 
 export async function safeFetch<T>(fn: () => Promise<T>, redirectPath: string, errorMsg: string): Promise<T | null> {
     try {

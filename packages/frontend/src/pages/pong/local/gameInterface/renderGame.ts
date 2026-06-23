@@ -1,12 +1,12 @@
 import { getPongGameHtml } from "./pongHtml.ts";
 import type { GameMode } from "../gameLogic/gameConfig.ts";
-import { dico } from "../../../dico/larousse.ts";
-import { loadPage } from "../../DOM_helper.ts";
+import { dico } from "../../../../dico/larousse.ts";
+import { loadPage } from "../../../DOM_helper.ts";
 import { startGame } from "../gameLogic/startGame.ts";
-import { navigate } from "../../../router.ts";
+import { navigate } from "../../../../router.ts";
 import { TournamentManager } from "../gameLogic/tournament.ts";
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../constants.ts";
-import { startOnlineGame } from "../gameLogic/startOnlineGame.ts";
+import { CANVAS_HEIGHT, CANVAS_WIDTH } from "../../constants.ts";
+import { startOnlineGame } from "../../online/startOnlineGame.ts";
 
 
 function setupCanvas(container: HTMLDivElement): HTMLCanvasElement | null {
