@@ -1,4 +1,4 @@
-import { drawOnlineGame } from "./drawOnlineScene";
+import { drawOnlineGame } from "./drawOnlineGame";
 import { onKeyDown, onKeyUp } from "./keyboard";
 
 export function startOnlineGame(canvas: HTMLCanvasElement) {

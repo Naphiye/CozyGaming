@@ -2,7 +2,7 @@ import type { GameState } from "./types";
 import { PADDLE_HEIGHT, PADDLE_WIDTH, CANVAS_WIDTH, CANVAS_HEIGHT, BALL_RADIUS } from "../constants";
 import { drawBackground } from "../common/draw";
 import { dico } from "../../../dico/larousse";
-import { drawPauseOverlay } from "../common/draw";
+import { drawCenteredText } from "./drawOnlineGame";
 
 interface GameOverData {
     type: "gameOver";
@@ -11,61 +11,7 @@ interface GameOverData {
 }
 
 
-
-export function drawOnlineGame(canvas: HTMLCanvasElement, event: MessageEvent<any>, cleanup: () => void) {
-    const data = JSON.parse(event.data);
-
-    //recuperation du canva
-    const ctx = canvas.getContext("2d");
-    if (!ctx)
-        return cleanup();
-
-    if (data.type === "opponentDisconnected") {
-        ctx.fillStyle = "#fff6ef";
-        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        ctx.fillStyle = "#915D4D";
-        ctx.textAlign = "center";
-        ctx.font = "bold 50px capy-font";
-        ctx.fillText(dico.tRaw("opponentDisconnected"), CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
-        return cleanup();
-    }
-    else if (data.type === "opponentWaiting") {
-        ctx.fillStyle = "#915D4D";
-        ctx.textAlign = "center";
-        ctx.font = "bold 50px capy-font";
-        ctx.fillText(dico.tRaw("opponentWaiting"), CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
-    }
-    else if (data.type === "countdown") {
-        ctx.fillStyle = "#fff6ef";
-        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-        ctx.fillStyle = "#915D4D";
-        ctx.font = `300px capy-font`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle"
-        if (data.value === 0) {
-            ctx.fillText(dico.tRaw("Go"), CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 2));
-        }
-        else {
-            ctx.fillText(`${data.value}`, CANVAS_WIDTH / 2, (CANVAS_HEIGHT / 2));
-        }
-    }
-    else if (data.type === "pause") {
-        drawPauseOverlay(ctx);
-
-    }
-    else if (data.type === "gameOver") {
-        drawWinner(canvas, cleanup, data);
-        return cleanup();
-    }
-    else {
-        const game: GameState = data;
-        drawOnlineScene(canvas, game);
-    }
-
-}
-
-
-function drawOnlineScene(canvas: HTMLCanvasElement, game: GameState) {
+export function drawOnlineScene(canvas: HTMLCanvasElement, game: GameState) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -108,12 +54,8 @@ function drawOnlineScene(canvas: HTMLCanvasElement, game: GameState) {
 
 
 
-function drawWinner(canvas: HTMLCanvasElement, cleanup: () => void, data: GameOverData) {
+export function drawWinner(ctx: CanvasRenderingContext2D, data: GameOverData) {
 
-    //recuperation du canva
-    const ctx = canvas.getContext("2d");
-    if (!ctx)
-        return cleanup();
 
     ctx.fillStyle = "#fff6ef";
     ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -137,8 +79,5 @@ function drawWinner(canvas: HTMLCanvasElement, cleanup: () => void, data: GameOv
     }
 
     // Affichage final
-    ctx.fillStyle = "#915D4D";
-    ctx.textAlign = "center";
-    ctx.font = "bold 50px capy-font";
-    ctx.fillText(label + displayedPseudo, CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    drawCenteredText(ctx, label + displayedPseudo);
 }
